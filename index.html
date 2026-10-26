@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLM 3D Comedy Arena — Viral Model-vs-Model Benchmark Studio (@RobinaMirbahar)</title>
+  <title>3D LLM Comedy Benchmark Arena (20 Animals) — Built with Gemini 4 Argon API</title>
+  <meta name="description" content="Interactive side-by-side 3D AI Model & DevOps Comedy Benchmark Studio (20 Animals, Qwen 4, Gemini 4 Argon API, Junior DevOps vs Principal Architect)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://robinamirbahar.github.io/llm-3d-comedy-arena/" />
+  <meta property="og:title" content="3D LLM Comedy Benchmark Arena (20 Animals) — Built with Gemini 4 Argon API" />
+  <meta property="og:description" content="Deploying on Friday at 4:59 PM 💀 vs Principal Architect zero-downtime infra 👑 — Compare 20 3D animals side-by-side!" />
+  <meta property="og:image" content="https://robinamirbahar.github.io/llm-3d-comedy-arena/preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="3D LLM Comedy Benchmark Arena (20 Animals)" />
+  <meta name="twitter:description" content="Side-by-side 3D AI Model & DevOps Comedy Benchmark Studio built with Gemini 4 Argon API." />
+  <meta name="twitter:image" content="https://robinamirbahar.github.io/llm-3d-comedy-arena/preview.png" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     :root {
@@ -2826,16 +2838,27 @@
     });
 
     async function shareToX() {
-      await copySnapshotToClipboard();
+      const copied = await copySnapshotToClipboard();
+      if (videoDownloadBanner && videoReadyText) {
+        videoReadyText.textContent = copied
+          ? '📸 HD 3D Snapshot copied to clipboard! In the X post window that opened, press Ctrl + V to paste the image!'
+          : '💡 Tip: Click "🖼️ Download PNG" or "⏺ Record 8s Video" and drag it into your X post!';
+        videoDownloadBanner.style.display = 'flex';
+      }
       const text = `${tweetTextDisplay.textContent}\n\nTry the 20-animal 3D benchmark arena: https://robinamirbahar.github.io/llm-3d-comedy-arena/`;
       const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
       window.open(xUrl, '_blank', 'noopener,noreferrer');
     }
 
     async function shareToLinkedIn() {
-      await copySnapshotToClipboard();
+      const copied = await copySnapshotToClipboard();
+      if (videoDownloadBanner && videoReadyText) {
+        videoReadyText.textContent = copied
+          ? '📸 HD 3D Snapshot copied to clipboard! In the LinkedIn post window that opened, press Ctrl + V to paste the image!'
+          : '💡 Tip: Click "🖼️ Download PNG" or "⏺ Record 8s Video" and attach it to your LinkedIn post!';
+        videoDownloadBanner.style.display = 'flex';
+      }
       const text = `${tweetTextDisplay.textContent}\n\nInteractive 3D LLM & DevOps Comedy Arena (20 Animals, Built with Gemini 4 Argon API):\nhttps://robinamirbahar.github.io/llm-3d-comedy-arena/`;
-      try { await navigator.clipboard.writeText(text); } catch (_) {}
       const liUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
       window.open(liUrl, '_blank', 'noopener,noreferrer');
     }
