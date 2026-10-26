@@ -439,12 +439,30 @@
     </div>
 
     <div class="toolbar-group">
-      <button class="btn active-toggle" id="argonAiBtn" title="Generate fresh AI roast & benchmark commentary via Gemini 4 Argon API">✨ Gemini 4 Argon Roast</button>
+      <button class="btn active-toggle" id="argonAiBtn" title="Generate fresh AI roast & benchmark commentary via Gemini 4 Argon API">✨ Generate Roast (Gemini 4 Argon API)</button>
       <button class="btn active-toggle" id="roastToggleBtn">💬 Roast Captions: ON</button>
       <button class="btn active-toggle" id="googlyToggleBtn">👀 Googly Derp Eyes: ON</button>
       <button class="btn" id="resetCamBtn" title="Reset 3D Camera Zoom & Angle">🔄 Fit / Reset View</button>
       <button class="btn btn-random" id="randomBtn">🎲 Randomize</button>
       <button class="btn btn-record" id="recordBtn">⏺ Record 8s Video</button>
+    </div>
+
+    <!-- Bring Your Own API Key (BYOK) Bar so any visitor can use their own Gemini API Key -->
+    <div style="width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 8px; border-top: 1px solid #f1f5f9;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+        <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #4338ca; letter-spacing: 0.04em;">🔑 Bring Your Own Gemini API Key (BYOK):</span>
+        <input id="userApiKeyInput" type="password" placeholder="Paste your Gemini API key (AIza...)" style="height: 32px; min-width: 230px; padding: 0 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12px;" />
+        <select id="apiModelSelect" style="height: 32px; min-width: 170px; padding: 0 8px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12px; font-weight: 600;">
+          <option value="gemini-4-argon" selected>API: gemini-4-argon</option>
+          <option value="gemini-3.8-flash">API: gemini-3.8-flash</option>
+          <option value="gemini-3.5-flash-lite">API: gemini-3.5-flash-lite</option>
+          <option value="gemma-4-31b-it">API: gemma-4-31b-it</option>
+        </select>
+        <button class="btn" id="saveKeyBtn" style="height: 32px; padding: 0 10px; font-size: 12px;">💾 Save Key</button>
+        <button class="btn" id="clearKeyBtn" style="height: 32px; padding: 0 10px; font-size: 12px;">Clear</button>
+        <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" style="font-size: 12px; font-weight: 700; color: #4f46e5; text-decoration: none;">Get Free Key ↗</a>
+      </div>
+      <span id="apiKeyStatusBadge" style="font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #f1f5f9; color: #475569;">⚪ Demo Mode (Paste your own key for live Gemini 4 Argon API calls)</span>
     </div>
   </div>
 
@@ -697,7 +715,45 @@
       }
     });
 
-    // Gemini 4 Argon API Live Roast & Benchmark Generator
+    // Bring Your Own API Key (BYOK) Management + Live Gemini 4 Argon API Calls
+    const userApiKeyInput = document.getElementById('userApiKeyInput');
+    const apiModelSelect = document.getElementById('apiModelSelect');
+    const saveKeyBtn = document.getElementById('saveKeyBtn');
+    const clearKeyBtn = document.getElementById('clearKeyBtn');
+    const apiKeyStatusBadge = document.getElementById('apiKeyStatusBadge');
+    const BYOK_STORAGE_KEY = 'LLM_ARENA_BYOK_GEMINI_API_KEY';
+
+    function refreshKeyStatus() {
+      const saved = (localStorage.getItem(BYOK_STORAGE_KEY) || '').trim();
+      if (saved) {
+        userApiKeyInput.value = saved;
+        apiKeyStatusBadge.textContent = `🟢 Your API Key Active (${apiModelSelect.value} • Stored only in your browser)`;
+        apiKeyStatusBadge.style.background = '#ecfdf5';
+        apiKeyStatusBadge.style.color = '#047857';
+      } else {
+        apiKeyStatusBadge.textContent = '⚪ Demo Mode (Paste your own key for live Gemini 4 Argon API calls)';
+        apiKeyStatusBadge.style.background = '#f1f5f9';
+        apiKeyStatusBadge.style.color = '#475569';
+      }
+    }
+
+    saveKeyBtn.addEventListener('click', () => {
+      const val = userApiKeyInput.value.trim();
+      if (val) {
+        localStorage.setItem(BYOK_STORAGE_KEY, val);
+      }
+      refreshKeyStatus();
+    });
+
+    clearKeyBtn.addEventListener('click', () => {
+      localStorage.removeItem(BYOK_STORAGE_KEY);
+      userApiKeyInput.value = '';
+      refreshKeyStatus();
+    });
+
+    apiModelSelect.addEventListener('change', refreshKeyStatus);
+    refreshKeyStatus();
+
     const ARGON_DYNAMIC_ROASTS = [
       { left: 'hallucinating 4D quaternion gimbal lock 💀', right: 'Qwen 4 + Gemini 4 Argon zero-shot 60fps physics ✨' },
       { left: 'token limit exceeded mid-stride 😭📉', right: 'Gemini 4 Argon API native 3D kinematics 🚀' },
@@ -706,15 +762,66 @@
       { left: 'when you copy-paste StackOverflow shaders 🍝', right: 'synthesized in 1 prompt with Gemini 4 Argon API ⚡' }
     ];
     let argonRoastIdx = 0;
-    document.getElementById('argonAiBtn').addEventListener('click', () => {
+
+    document.getElementById('argonAiBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('argonAiBtn');
       const sceneKey = sceneSelect.value;
       const meta = SCENE_ROASTS[sceneKey] || SCENE_ROASTS.giraffe;
+      const l = leftLabelInput.value || 'Opus 5.5';
+      const r = rightLabelInput.value || 'Qwen 4';
+      const activeKey = (userApiKeyInput.value || localStorage.getItem(BYOK_STORAGE_KEY) || '').trim();
+
+      if (activeKey) {
+        localStorage.setItem(BYOK_STORAGE_KEY, activeKey);
+        refreshKeyStatus();
+        const chosenModel = apiModelSelect.value || 'gemini-4-argon';
+        btn.disabled = true;
+        btn.textContent = `⏳ Calling ${chosenModel}...`;
+        try {
+          const { GoogleGenAI } = await import('https://esm.sh/@google/genai@2.30.1');
+          const client = new GoogleGenAI({ apiKey: activeKey });
+          const prompt = `You are a witty AI benchmark comedian. Generate a short, hilarious side-by-side 3D animal benchmark roast comparing "${l}" (Left model: derpy, blocky, glitched physics) vs "${r}" (Right model: ultra-smooth, locked-in masterpiece) on the "${sceneKey}" (${meta.emoji}) 3D animation benchmark. Return ONLY valid JSON with keys: {"left": "short funny roast max 7 words with emoji", "right": "short funny praise max 7 words with emoji", "caption": "short viral X/Twitter post caption mentioning Introducing Qwen 4 😀 and Gemini 4 Argon API"}.`;
+
+          let interaction;
+          try {
+            interaction = await client.interactions.create({
+              model: chosenModel,
+              input: prompt
+            });
+          } catch (modelErr) {
+            interaction = await client.interactions.create({
+              model: 'gemini-3.8-flash',
+              input: prompt
+            });
+          }
+
+          const rawText = (interaction.output_text || '').trim();
+          const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+          if (jsonMatch) {
+            const parsed = JSON.parse(jsonMatch[0]);
+            if (parsed.left) leftRoastBadge.textContent = `${meta.emoji} ${parsed.left}`;
+            if (parsed.right) rightRoastBadge.textContent = `${meta.emoji} ${parsed.right}`;
+            if (parsed.caption) tweetTextDisplay.textContent = parsed.caption;
+            apiKeyStatusBadge.textContent = `✅ Live response from ${chosenModel} using your API key!`;
+            btn.disabled = false;
+            btn.textContent = '✨ Generate Roast (Gemini 4 Argon API)';
+            return;
+          }
+        } catch (err) {
+          console.warn('Live BYOK Gemini API call fallback:', err);
+          apiKeyStatusBadge.textContent = `⚠️ API Key Error (${err.message || 'Check key'}) — used instant preset`;
+          apiKeyStatusBadge.style.background = '#fef2f2';
+          apiKeyStatusBadge.style.color = '#b91c1c';
+        }
+        btn.disabled = false;
+        btn.textContent = '✨ Generate Roast (Gemini 4 Argon API)';
+      }
+
+      // Instant preset fallback when no API key is entered
       const pick = ARGON_DYNAMIC_ROASTS[argonRoastIdx % ARGON_DYNAMIC_ROASTS.length];
       argonRoastIdx++;
       leftRoastBadge.textContent = `${meta.emoji} ${pick.left}`;
       rightRoastBadge.textContent = `${meta.emoji} ${pick.right}`;
-      const l = leftLabelInput.value || 'Opus 5.5';
-      const r = rightLabelInput.value || 'Qwen 4';
       tweetTextDisplay.textContent = `Introducing Qwen 4 😀 — ${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀 (generated with Gemini 4 Argon API)`;
     });
 
