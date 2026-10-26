@@ -321,37 +321,57 @@
       <span class="brand-badge">⚡ BUILT WITH GEMINI 4 ARGON API</span>
       <h1>3D LLM Comedy Benchmark Arena (20 Animals)</h1>
     </div>
-    <div class="field" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <label style="white-space: nowrap; font-size: 12px; color: #4338ca;">🔥 Quick Matchup Preset:</label>
-        <select id="matchupSelect" style="min-width: 340px; border-color: #c7d2fe; background: #eef2ff; color: #1e1b4b; font-weight: 700;">
-          <option value="" disabled>👇 Select a Viral Matchup Preset from Dropdown...</option>
-          <option value="Junior DevOps|Principal Architect (@RobinaMirbahar)" selected>Junior DevOps 💀 vs Principal Architect (@RobinaMirbahar) 👑</option>
-          <option value="Junior Dev Prompt|Principal Architect (@RobinaMirbahar)">Junior Dev Prompt vs Principal Architect (@RobinaMirbahar)</option>
-          <option value="Opus 5.5|Qwen 4">Introducing Qwen 4 😀 (Opus 5.5 vs Qwen 4)</option>
-          <option value="Claude 4.6 Opus|Qwen 4">Introducing Qwen 4 😀 (Claude 4.6 Opus vs Qwen 4)</option>
-          <option value="GPT-5.5 Turbo|Qwen 4 Max">GPT-5.5 Turbo vs Qwen 4 Max</option>
-          <option value="Opus 5.5|Gemini 4 Argon">Opus 5.5 vs Gemini 4 Argon</option>
-          <option value="Qwen 4|Gemini 4 Argon">Qwen 4 vs Gemini 4 Argon</option>
-          <option value="Claude 4.6 Opus|Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</option>
-          <option value="Opus 5.5|Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</option>
-          <option value="DeepSeek R2|Qwen 4 Coder">DeepSeek R2 vs Qwen 4 Coder</option>
-          <option value="GPT-5.5 Turbo|Gemma 4 31B-IT">GPT-5.5 Turbo vs Gemma 4 31B-IT</option>
-          <option value="My Code at 3 AM 💀|Qwen 4">3 AM Code 💀 vs Qwen 4 ✨</option>
-          <option value="My Code at 3 AM 💀|Gemini 4 Argon">3 AM Code 💀 vs Gemini 4 Argon ⚡</option>
-        </select>
+    <div class="field" style="flex-direction: column; align-items: flex-end; gap: 6px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <label style="white-space: nowrap; font-size: 11.5px; color: #047857; font-weight: 800;">👤 Your Name / Handle (Dynamic):</label>
+          <input id="creatorNameInput" type="text" placeholder="Type your name/handle (e.g. @RobinaMirbahar)" value="@RobinaMirbahar" style="height: 34px; min-width: 175px; border-color: #6ee7b7; background: #ecfdf5; color: #065f46; font-weight: 700;" title="Type your own name or handle — all roles, headers & captions update dynamically!" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <label style="white-space: nowrap; font-size: 11.5px; color: #4338ca; font-weight: 800;">🔥 Quick Matchup Preset:</label>
+          <select id="matchupSelect" style="min-width: 340px; border-color: #c7d2fe; background: #eef2ff; color: #1e1b4b; font-weight: 700;">
+            <option value="" disabled>👇 Select a Role or AI Model Matchup from Dropdown...</option>
+            <optgroup label="👑 Tech & Engineering Roles (Dynamic with Your Name!)">
+              <option value="Junior DevOps 💀|Principal Architect ({USER}) 👑" selected>Junior DevOps 💀 vs Principal Architect (@RobinaMirbahar) 👑</option>
+              <option value="Intern Pushing to Main 💀|Staff SRE ({USER}) 🛡️">Intern Pushing to Main 💀 vs Staff SRE (@RobinaMirbahar) 🛡️</option>
+              <option value="Vibe Coder (0 Tests) 😭|10x Founding AI Engineer ({USER}) 🚀">Vibe Coder (0 Tests) 😭 vs 10x Founding AI Engineer (@RobinaMirbahar) 🚀</option>
+              <option value="Copy-Paste StackOverflow Dev 🍝|Senior Cloud Architect ({USER}) ☁️">Copy-Paste StackOverflow Dev 🍝 vs Senior Cloud Architect (@RobinaMirbahar) ☁️</option>
+              <option value="Junior Dev Prompt 🥺|Principal AI Architect ({USER}) 🧠">Junior Dev Prompt 🥺 vs Principal AI Architect (@RobinaMirbahar) 🧠</option>
+              <option value="PM Changing Specs at 5 PM 📋|Tech Lead ({USER}) Locking In 🔒">PM Changing Specs at 5 PM 📋 vs Tech Lead (@RobinaMirbahar) 🔒</option>
+              <option value="Junior Frontend Centering a Div 😵‍💫|Full-Stack Wizard ({USER}) ✨">Junior Frontend Centering a Div 😵‍💫 vs Full-Stack Wizard (@RobinaMirbahar) ✨</option>
+              <option value="Manual QA Clicking Around 🐢|DevSecOps Automation Lead ({USER}) ⚡">Manual QA Clicking Around 🐢 vs DevSecOps Lead (@RobinaMirbahar) ⚡</option>
+              <option value="Legacy Monolith Maintainer 🏚️|Kubernetes Platform Lead ({USER}) ☸️">Legacy Monolith Maintainer 🏚️ vs K8s Platform Lead (@RobinaMirbahar) ☸️</option>
+              <option value="Untitled47.ipynb Data Scientist 📓|MLOps Principal ({USER}) 📈">Untitled47.ipynb Data Scientist 📓 vs MLOps Principal (@RobinaMirbahar) 📈</option>
+              <option value="Freelancer Who Disappeared 💀|CTO / Founder ({USER}) 💎">Freelancer Who Disappeared 💀 vs CTO / Founder (@RobinaMirbahar) 💎</option>
+              <option value="LeetCode Grinder in Prod 😭|Distributed Systems Architect ({USER}) 🏆">LeetCode Grinder in Prod 😭 vs Systems Architect (@RobinaMirbahar) 🏆</option>
+            </optgroup>
+            <optgroup label="🤖 Viral AI Model Benchmarks (Qwen 4, Gemini 4 Argon, Opus 5.5)">
+              <option value="Opus 5.5|Qwen 4">Introducing Qwen 4 😀 (Opus 5.5 vs Qwen 4)</option>
+              <option value="Claude 4.6 Opus|Qwen 4">Introducing Qwen 4 😀 (Claude 4.6 Opus vs Qwen 4)</option>
+              <option value="GPT-5.5 Turbo|Qwen 4 Max">GPT-5.5 Turbo vs Qwen 4 Max</option>
+              <option value="Opus 5.5|Gemini 4 Argon">Opus 5.5 vs Gemini 4 Argon ⚡</option>
+              <option value="Qwen 4|Gemini 4 Argon">Qwen 4 vs Gemini 4 Argon ⚡</option>
+              <option value="Claude 4.6 Opus|Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</option>
+              <option value="Opus 5.5|Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</option>
+              <option value="DeepSeek R2|Qwen 4 Coder">DeepSeek R2 vs Qwen 4 Coder</option>
+              <option value="GPT-5.5 Turbo|Gemma 4 31B-IT">GPT-5.5 Turbo vs Gemma 4 31B-IT</option>
+              <option value="My Code at 3 AM 💀|Qwen 4">3 AM Code 💀 vs Qwen 4 ✨</option>
+              <option value="My Code at 3 AM 💀|Gemini 4 Argon">3 AM Code 💀 vs Gemini 4 Argon ⚡</option>
+            </optgroup>
+          </select>
+        </div>
       </div>
-      <span style="font-size: 11px; color: #6366f1; font-weight: 600;">💡 Guide: Click dropdown above to switch presets, or pick any Left/Right Model & Animal below!</span>
+      <span style="font-size: 11px; color: #6366f1; font-weight: 600;">💡 Guide: Type your own name in "👤 Your Name / Handle" above — every role &amp; watermark updates dynamically with your name!</span>
     </div>
   </div>
 
   <!-- Step-by-Step Placeholder Guide Strip -->
   <div style="width: 100%; max-width: 1080px; background: #eef2ff; border: 1px dashed #a5b4fc; border-radius: 12px; padding: 8px 16px; margin-bottom: 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: #312e81;">
     <span><strong>📖 Quick Studio Guide:</strong></span>
-    <span><strong>1️⃣</strong> Select <em>Quick Matchup</em> or <em>Left/Right Models</em> ▾</span>
+    <span><strong>1️⃣</strong> Enter <em>Your Name</em> &amp; pick a <em>Role / Model Matchup</em> ▾</span>
     <span><strong>2️⃣</strong> Select any of the <em>20 3D Animals</em> ▾</span>
-    <span><strong>3️⃣</strong> Paste your <em>Gemini API Key</em> (optional) for live AI roasts</span>
-    <span><strong>4️⃣</strong> Click <strong>⏺ Record 8s Video</strong> &amp; <strong>Copy Caption</strong>!</span>
+    <span><strong>3️⃣</strong> Pick a <em>Funny Phrase</em> ▾</span>
+    <span><strong>4️⃣</strong> Click <strong>🐦 Share on X</strong>, <strong>💼 Share on LinkedIn</strong>, or <strong>⏺ Record 8s Video</strong>!</span>
   </div>
 
   <!-- Studio Controls (All Dropdowns with Placeholder Guides) -->
@@ -385,60 +405,96 @@
       </div>
 
       <div class="field">
-        <label>👈 2. Select Left Model (Derpy)</label>
-        <select id="leftLabelInput" style="min-width: 175px;" title="Select the Left (derpy/blocky) model or role">
-          <option value="" disabled>👇 Choose Left Model / Role...</option>
-          <option value="Junior DevOps" selected>Junior DevOps 💀</option>
-          <option value="Junior Dev Prompt">Junior Dev Prompt</option>
-          <option value="Opus 5.5">Opus 5.5</option>
-          <option value="Claude 4.6 Opus">Claude 4.6 Opus</option>
-          <option value="Claude 4.5 Sonnet">Claude 4.5 Sonnet</option>
-          <option value="GPT-5.5 Turbo">GPT-5.5 Turbo</option>
-          <option value="o4-mini-high">o4-mini-high</option>
-          <option value="DeepSeek R2">DeepSeek R2</option>
-          <option value="Qwen 4">Qwen 4</option>
-          <option value="Qwen 3.5 Max">Qwen 3.5 Max</option>
-          <option value="Gemini 4 Argon">Gemini 4 Argon</option>
-          <option value="Gemini 4 Carbon">Gemini 4 Carbon</option>
-          <option value="Gemma 4 31B-IT">Gemma 4 31B-IT</option>
-          <option value="Llama 4 405B">Llama 4 405B</option>
-          <option value="Grok 4 Unhinged">Grok 4 Unhinged</option>
-          <option value="Mistral Large 3">Mistral Large 3</option>
-          <option value="My Code at 3 AM 💀">My Code at 3 AM 💀</option>
+        <label>👈 2. Select Left Role / Model (Derpy)</label>
+        <select id="leftLabelInput" style="min-width: 195px;" title="Select the Left (derpy/blocky) role or AI model">
+          <option value="" disabled>👇 Choose Left Role or AI Model...</option>
+          <optgroup label="💀 Funny Tech & Dev Roles">
+            <option value="Junior DevOps 💀" selected>Junior DevOps 💀</option>
+            <option value="Intern Pushing to Main 💀">Intern Pushing to Main 💀</option>
+            <option value="Vibe Coder (0 Tests) 😭">Vibe Coder (0 Tests) 😭</option>
+            <option value="Copy-Paste StackOverflow Dev 🍝">Copy-Paste StackOverflow Dev 🍝</option>
+            <option value="Junior Dev Prompt 🥺">Junior Dev Prompt 🥺</option>
+            <option value="PM Changing Specs at 5 PM 📋">PM Changing Specs at 5 PM 📋</option>
+            <option value="Junior Frontend Centering a Div 😵‍💫">Junior Frontend Centering a Div 😵‍💫</option>
+            <option value="Manual QA Clicking Around 🐢">Manual QA Clicking Around 🐢</option>
+            <option value="Legacy Monolith Maintainer 🏚️">Legacy Monolith Maintainer 🏚️</option>
+            <option value="Untitled47.ipynb Data Scientist 📓">Untitled47.ipynb Data Scientist 📓</option>
+            <option value="Freelancer Who Disappeared 💀">Freelancer Who Disappeared 💀</option>
+            <option value="LeetCode Grinder in Prod 😭">LeetCode Grinder in Prod 😭</option>
+            <option value="My Code at 3 AM 💀">My Code at 3 AM 💀</option>
+          </optgroup>
+          <optgroup label="🤖 AI Models">
+            <option value="Opus 5.5">Opus 5.5</option>
+            <option value="Claude 4.6 Opus">Claude 4.6 Opus</option>
+            <option value="Claude 4.5 Sonnet">Claude 4.5 Sonnet</option>
+            <option value="GPT-5.5 Turbo">GPT-5.5 Turbo</option>
+            <option value="o4-mini-high">o4-mini-high</option>
+            <option value="DeepSeek R2">DeepSeek R2</option>
+            <option value="Qwen 4">Qwen 4</option>
+            <option value="Qwen 3.5 Max">Qwen 3.5 Max</option>
+            <option value="Gemini 4 Argon">Gemini 4 Argon</option>
+            <option value="Gemini 4 Carbon">Gemini 4 Carbon</option>
+            <option value="Gemma 4 31B-IT">Gemma 4 31B-IT</option>
+            <option value="Llama 4 405B">Llama 4 405B</option>
+            <option value="Grok 4 Unhinged">Grok 4 Unhinged</option>
+            <option value="Mistral Large 3">Mistral Large 3</option>
+          </optgroup>
         </select>
       </div>
 
       <div class="field">
-        <label>👉 3. Select Right Model (Pro)</label>
-        <select id="rightLabelInput" style="min-width: 195px;" title="Select the Right (pro/smooth) model or role">
-          <option value="" disabled>👇 Choose Right Model / Role...</option>
-          <option value="Principal Architect (@RobinaMirbahar)" selected>Principal Architect (@RobinaMirbahar) 👑</option>
-          <option value="Qwen 4">Qwen 4 😀</option>
-          <option value="Qwen 4 Max">Qwen 4 Max</option>
-          <option value="Qwen 4 Coder">Qwen 4 Coder</option>
-          <option value="Qwen 4 235B">Qwen 4 235B</option>
-          <option value="Gemini 4 Argon">Gemini 4 Argon ⚡</option>
-          <option value="Gemini 4 Carbon">Gemini 4 Carbon</option>
-          <option value="Gemma 4 31B-IT">Gemma 4 31B-IT</option>
-          <option value="Gemma 4 Multi-LoRA">Gemma 4 Multi-LoRA</option>
-          <option value="Opus 5.5">Opus 5.5</option>
-          <option value="Claude 4.6 Opus">Claude 4.6 Opus</option>
-          <option value="GPT-5.5 Turbo">GPT-5.5 Turbo</option>
-          <option value="DeepSeek R2">DeepSeek R2</option>
-          <option value="Llama 4 405B">Llama 4 405B</option>
-          <option value="Grok 4 Unhinged">Grok 4 Unhinged</option>
-          <option value="Built with Gemini 4 Argon ✨">Built with Gemini 4 Argon ✨</option>
+        <label>👉 3. Select Right Role / Model (Pro)</label>
+        <select id="rightLabelInput" style="min-width: 215px;" title="Select the Right (pro/smooth) role or AI model">
+          <option value="" disabled>👇 Choose Right Role or AI Model...</option>
+          <optgroup label="👑 Pro Roles (Dynamic with Your Name!)">
+            <option value="Principal Architect ({USER}) 👑" selected>Principal Architect (@RobinaMirbahar) 👑</option>
+            <option value="Staff SRE ({USER}) 🛡️">Staff SRE (@RobinaMirbahar) 🛡️</option>
+            <option value="10x Founding AI Engineer ({USER}) 🚀">10x Founding AI Engineer (@RobinaMirbahar) 🚀</option>
+            <option value="Senior Cloud Architect ({USER}) ☁️">Senior Cloud Architect (@RobinaMirbahar) ☁️</option>
+            <option value="Principal AI Architect ({USER}) 🧠">Principal AI Architect (@RobinaMirbahar) 🧠</option>
+            <option value="Tech Lead ({USER}) Locking In 🔒">Tech Lead (@RobinaMirbahar) Locking In 🔒</option>
+            <option value="Full-Stack Wizard ({USER}) ✨">Full-Stack Wizard (@RobinaMirbahar) ✨</option>
+            <option value="DevSecOps Automation Lead ({USER}) ⚡">DevSecOps Automation Lead (@RobinaMirbahar) ⚡</option>
+            <option value="Kubernetes Platform Lead ({USER}) ☸️">Kubernetes Platform Lead (@RobinaMirbahar) ☸️</option>
+            <option value="MLOps Principal ({USER}) 📈">MLOps Principal (@RobinaMirbahar) 📈</option>
+            <option value="CTO / Founder ({USER}) 💎">CTO / Founder (@RobinaMirbahar) 💎</option>
+            <option value="Distributed Systems Architect ({USER}) 🏆">Distributed Systems Architect (@RobinaMirbahar) 🏆</option>
+          </optgroup>
+          <optgroup label="🤖 Pro AI Models">
+            <option value="Qwen 4">Qwen 4 😀</option>
+            <option value="Qwen 4 Max">Qwen 4 Max</option>
+            <option value="Qwen 4 Coder">Qwen 4 Coder</option>
+            <option value="Qwen 4 235B">Qwen 4 235B</option>
+            <option value="Gemini 4 Argon">Gemini 4 Argon ⚡</option>
+            <option value="Gemini 4 Carbon">Gemini 4 Carbon</option>
+            <option value="Gemma 4 31B-IT">Gemma 4 31B-IT</option>
+            <option value="Gemma 4 Multi-LoRA">Gemma 4 Multi-LoRA</option>
+            <option value="Opus 5.5">Opus 5.5</option>
+            <option value="Claude 4.6 Opus">Claude 4.6 Opus</option>
+            <option value="GPT-5.5 Turbo">GPT-5.5 Turbo</option>
+            <option value="DeepSeek R2">DeepSeek R2</option>
+            <option value="Llama 4 405B">Llama 4 405B</option>
+            <option value="Grok 4 Unhinged">Grok 4 Unhinged</option>
+            <option value="Built with Gemini 4 Argon ✨">Built with Gemini 4 Argon ✨</option>
+          </optgroup>
         </select>
       </div>
 
       <div class="field">
-        <label>📣 4. Select Post Hook / Caption</label>
-        <select id="hookSelect" style="min-width: 190px;" title="Choose the viral hook style for your post caption">
-          <option value="" disabled>👇 Choose Caption Hook Style...</option>
-          <option value="qwen4_argon" selected>Introducing Qwen 4 😀 + Gemini 4 Argon API</option>
-          <option value="qwen4">Introducing Qwen 4 😀</option>
-          <option value="argon">Built with Gemini 4 Argon API ⚡</option>
-          <option value="classic">Classic Roast (vs 💀)</option>
+        <label>😂 4. Select Funny Viral Phrase (Dropdown)</label>
+        <select id="hookSelect" style="min-width: 265px;" title="Choose a funny viral phrase for your card and X / LinkedIn post">
+          <option value="" disabled>👇 Choose a Funny Viral Phrase...</option>
+          <option value="Deploying on Friday at 4:59 PM 💀 vs Principal Architect zero-downtime infra 👑" selected>🔥 Deploying on Friday at 4:59 PM 💀 vs Zero-Downtime Infra 👑</option>
+          <option value="Introducing Qwen 4 😀 — bro on the left forgot how physics work 💀">😀 Introducing Qwen 4 😀 — bro on the left forgot physics 💀</option>
+          <option value="Junior DevOps running terraform destroy 🔥 vs Principal Architect (@RobinaMirbahar) ✨">💥 Junior DevOps terraform destroy 🔥 vs Principal Architect ✨</option>
+          <option value="When someone says 'it works on my machine' 😭 vs Docker + Kubernetes in prod 🚀">🐳 "It works on my machine" 😭 vs Docker + K8s in Prod 🚀</option>
+          <option value="10 hours debugging CSS 😭 vs 1 prompt with Gemini 4 Argon API ⚡">⚡ 10h Debugging CSS 😭 vs 1 Prompt in Gemini 4 Argon API ⚡</option>
+          <option value="Vibe coding with 0 tests 💀 vs 42 repos passing GitHub Actions CI/CD ✅">✅ Vibe Coding 0 Tests 💀 vs 42 Repos Green CI/CD ✅</option>
+          <option value="What the client paid for ✨ vs What the intern pushed to main at 3 AM 💀">💸 What the Client Paid For vs Intern Push to Main at 3 AM 💀</option>
+          <option value="Left: hallucinates 12 npm packages 📦 vs Right: ships clean prod code 🔥">📦 Hallucinating 12 npm Packages vs Shipping Clean Prod Code 🔥</option>
+          <option value="Writing regex from memory 😵‍💫 vs Asking Qwen 4 + Gemini 4 Argon API 🧠">🧠 Writing Regex from Memory 😵‍💫 vs Qwen 4 + Gemini 4 Argon 🧠</option>
+          <option value="Me explaining my architecture in the interview 🎤 vs My side project code 🍝">🎤 Explaining Architecture in Interview vs My Side Project Code 🍝</option>
+          <option value="My brain before coffee ☕ vs After 3 espressos and Gemini 4 Argon API ⚡">☕ Brain Before Coffee vs After 3 Espressos + Gemini 4 Argon ⚡</option>
         </select>
       </div>
 
@@ -459,13 +515,30 @@
       </div>
     </div>
 
-    <div class="toolbar-group">
-      <button class="btn active-toggle" id="argonAiBtn" title="Generate fresh AI roast & benchmark commentary via Gemini 4 Argon API">✨ Generate Roast (Gemini 4 Argon API)</button>
-      <button class="btn active-toggle" id="roastToggleBtn">💬 Roast Captions: ON</button>
-      <button class="btn active-toggle" id="googlyToggleBtn">👀 Googly Derp Eyes: ON</button>
-      <button class="btn" id="resetCamBtn" title="Reset 3D Camera Zoom & Angle">🔄 Fit / Reset View</button>
-      <button class="btn btn-random" id="randomBtn">🎲 Randomize</button>
-      <button class="btn btn-record" id="recordBtn">⏺ Record 8s Video</button>
+    <div class="toolbar-group" style="width: 100%; justify-content: space-between; padding-top: 4px; border-top: 1px solid #f1f5f9;">
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        <button class="btn active-toggle" id="argonAiBtn" title="Generate fresh AI roast & benchmark commentary via Gemini 4 Argon API">✨ Generate Roast (Gemini 4 Argon API)</button>
+        <button class="btn active-toggle" id="roastToggleBtn">💬 Roast Captions: ON</button>
+        <button class="btn active-toggle" id="googlyToggleBtn">👀 Googly Derp Eyes: ON</button>
+        <button class="btn" id="resetCamBtn" title="Reset 3D Camera Zoom & Angle">🔄 Fit / Reset View</button>
+        <button class="btn btn-random" id="randomBtn">🎲 Randomize</button>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        <button class="btn" id="copyImgBtn" style="background: #f0fdf4; color: #166534; border-color: #bbf7d0;" title="Copy HD Comparison Snapshot to Clipboard (Paste with Ctrl+V on X or LinkedIn)">📸 Copy Image (Ctrl+V)</button>
+        <button class="btn" id="downloadPngBtn" title="Download HD PNG Image for X / LinkedIn">🖼️ Download PNG</button>
+        <button class="btn btn-record" id="recordBtn">⏺ Record 8s Video</button>
+        <button class="btn" id="shareXBtn" style="background: #0f172a; color: #ffffff; border-color: #0f172a;">🐦 Share on X</button>
+        <button class="btn" id="shareLinkedInBtn" style="background: #0a66c2; color: #ffffff; border-color: #0a66c2;">💼 Share on LinkedIn</button>
+      </div>
+    </div>
+
+    <!-- Persistent Video Download Ready Banner (Appears as soon as recording completes) -->
+    <div id="videoDownloadBanner" style="display: none; width: 100%; background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 10px; padding: 8px 14px; align-items: center; justify-content: space-between; gap: 10px; font-size: 12.5px; color: #065f46; font-weight: 700;">
+      <span id="videoReadyText">✅ Your 8s Video is ready! Click Download Video below, then attach it to your X or LinkedIn post:</span>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <a id="directVideoDownloadLink" href="#" download="llm-benchmark.webm" class="btn" style="background: #059669; color: #fff; border: none; text-decoration: none; height: 32px; padding: 0 12px;">⬇️ Download Video File</a>
+        <button class="btn" id="nativeShareVideoBtn" style="height: 32px; padding: 0 12px;">📲 Share Video File</button>
+      </div>
     </div>
 
     <!-- Bring Your Own API Key (BYOK) Bar so any visitor can use their own Gemini API Key -->
@@ -489,9 +562,13 @@
 
   <!-- Viral Split-Screen Comparison Card -->
   <div class="comparison-frame" id="captureFrame">
+    <!-- Funny Phrase Banner inside the Card -->
+    <div id="funnyPhraseBanner" style="width: 100%; background: #f8fafc; border-bottom: 1px solid #e5e7eb; padding: 7px 16px; text-align: center; font-size: 14px; font-weight: 800; color: #312e81; letter-spacing: -0.01em;">
+      “Deploying on Friday at 4:59 PM 💀 vs Principal Architect zero-downtime infra 👑”
+    </div>
     <div class="frame-header">
-      <div class="frame-header-title" id="leftTitleDisplay">Opus 5.5</div>
-      <div class="frame-header-title" id="rightTitleDisplay">Qwen 4</div>
+      <div class="frame-header-title" id="leftTitleDisplay">Junior DevOps</div>
+      <div class="frame-header-title" id="rightTitleDisplay">Principal Architect (@RobinaMirbahar)</div>
     </div>
     <div class="stage-grid">
       <div class="pane" id="leftPane">
@@ -505,14 +582,16 @@
     </div>
   </div>
 
-  <!-- Copyable Viral Post Caption Footer -->
+  <!-- Copyable Viral Post Caption Footer + Direct Share Buttons -->
   <div class="footer-bar">
     <div class="tweet-preview">
       <span>📋 <strong>Ready-to-Post X / LinkedIn Caption:</strong></span>
-      <code id="tweetTextDisplay">Introducing Qwen 4 😀 — opus 5.5 vs qwen 4 🦒💀 (built with Gemini 4 Argon API)</code>
-      <button class="btn" id="copyTweetBtn" style="height: 30px; padding: 4px 10px; font-size: 12px;">Copy Caption</button>
+      <code id="tweetTextDisplay">Deploying on Friday at 4:59 PM 💀 vs Principal Architect zero-downtime infra 👑 — Junior DevOps vs Principal Architect (@RobinaMirbahar) 🦒💀 (built with Gemini 4 Argon API)</code>
+      <button class="btn" id="copyTweetBtn" style="height: 30px; padding: 4px 10px; font-size: 12px;">📋 Copy Caption</button>
+      <button class="btn" id="footerShareXBtn" style="height: 30px; padding: 4px 10px; font-size: 12px; background: #0f172a; color: #fff;">🐦 Post to X</button>
+      <button class="btn" id="footerShareLinkedInBtn" style="height: 30px; padding: 4px 10px; font-size: 12px; background: #0a66c2; color: #fff;">💼 Post to LinkedIn</button>
     </div>
-    <span>⚡ Powered by Gemini 4 Argon API • Drag stage to rotate • Scroll wheel to zoom</span>
+    <span>💡 Tip: Click "🐦 Share on X" or "💼 Share on LinkedIn" — it also copies the HD snapshot so you can press Ctrl+V!</span>
   </div>
 
   <script>
@@ -681,6 +760,7 @@
 
     const leftPane = document.getElementById('leftPane');
     const rightPane = document.getElementById('rightPane');
+    const creatorNameInput = document.getElementById('creatorNameInput');
     const leftLabelInput = document.getElementById('leftLabelInput');
     const rightLabelInput = document.getElementById('rightLabelInput');
     const matchupSelect = document.getElementById('matchupSelect');
@@ -689,38 +769,74 @@
     const leftTitleDisplay = document.getElementById('leftTitleDisplay');
     const rightTitleDisplay = document.getElementById('rightTitleDisplay');
     const watermarkDisplay = document.getElementById('watermarkDisplay');
+    const funnyPhraseBanner = document.getElementById('funnyPhraseBanner');
     const sceneSelect = document.getElementById('sceneSelect');
     const chaosSelect = document.getElementById('chaosSelect');
     const leftRoastBadge = document.getElementById('leftRoastBadge');
     const rightRoastBadge = document.getElementById('rightRoastBadge');
     const tweetTextDisplay = document.getElementById('tweetTextDisplay');
 
+    const CREATOR_STORAGE_KEY = 'LLM_ARENA_CREATOR_NAME';
+    const savedCreator = localStorage.getItem(CREATOR_STORAGE_KEY);
+    if (savedCreator) {
+      creatorNameInput.value = savedCreator;
+      watermarkInput.value = `${savedCreator} • Gemini 4 Argon API`;
+    }
+
     let showRoasts = true;
     let showGooglyEyes = true;
 
+    function resolveUserText(str) {
+      const u = (creatorNameInput.value || '@RobinaMirbahar').trim() || '@RobinaMirbahar';
+      return (str || '').replace(/\{USER\}/g, u).replace(/@RobinaMirbahar/g, u);
+    }
+
+    // Store original option templates so dynamic name replacement works repeatedly
+    [matchupSelect, rightLabelInput, hookSelect].forEach((sel) => {
+      if (!sel) return;
+      Array.from(sel.options).forEach((opt) => {
+        opt.setAttribute('data-tpl', opt.textContent);
+      });
+    });
+
+    function syncDynamicOptionLabels() {
+      const u = (creatorNameInput.value || '@RobinaMirbahar').trim() || '@RobinaMirbahar';
+      [matchupSelect, rightLabelInput, hookSelect].forEach((sel) => {
+        if (!sel) return;
+        Array.from(sel.options).forEach((opt) => {
+          const tpl = opt.getAttribute('data-tpl') || opt.textContent;
+          opt.textContent = tpl.replace(/\{USER\}/g, u).replace(/@RobinaMirbahar/g, u);
+        });
+      });
+    }
+
     function updateLabelsAndTweet() {
-      const l = leftLabelInput.value || 'Opus 5.5';
-      const r = rightLabelInput.value || 'Qwen 4';
+      syncDynamicOptionLabels();
+      const l = resolveUserText(leftLabelInput.value || 'Junior DevOps 💀');
+      const r = resolveUserText(rightLabelInput.value || 'Principal Architect ({USER}) 👑');
       leftTitleDisplay.textContent = l;
       rightTitleDisplay.textContent = r;
-      watermarkDisplay.textContent = watermarkInput.value || '@RobinaMirbahar • Gemini 4 Argon API';
+      watermarkDisplay.textContent = watermarkInput.value || `${creatorNameInput.value || '@RobinaMirbahar'} • Gemini 4 Argon API`;
 
-      const sceneKey = sceneSelect.value;
+      const sceneKey = sceneSelect.value || 'giraffe';
       const meta = SCENE_ROASTS[sceneKey] || SCENE_ROASTS.giraffe;
       leftRoastBadge.textContent = meta.left;
       rightRoastBadge.textContent = meta.right;
 
-      const hookMode = hookSelect ? hookSelect.value : 'qwen4_argon';
-      if (hookMode === 'qwen4_argon') {
-        tweetTextDisplay.textContent = `Introducing Qwen 4 😀 — ${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀 (built with Gemini 4 Argon API)`;
-      } else if (hookMode === 'qwen4') {
-        tweetTextDisplay.textContent = `Introducing Qwen 4 😀 — ${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀`;
-      } else if (hookMode === 'argon') {
-        tweetTextDisplay.textContent = `${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀 (built with Gemini 4 Argon API ⚡)`;
-      } else {
-        tweetTextDisplay.textContent = `${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀`;
+      const rawPhrase = hookSelect ? hookSelect.value : 'Deploying on Friday at 4:59 PM 💀 vs Principal Architect zero-downtime infra 👑';
+      const resolvedPhrase = resolveUserText(rawPhrase);
+      if (funnyPhraseBanner) {
+        funnyPhraseBanner.textContent = `“${resolvedPhrase}”`;
       }
+      tweetTextDisplay.textContent = `${resolvedPhrase} — ${l} vs ${r} ${meta.emoji} (built with Gemini 4 Argon API)`;
     }
+
+    creatorNameInput.addEventListener('input', () => {
+      const u = (creatorNameInput.value || '@RobinaMirbahar').trim() || '@RobinaMirbahar';
+      localStorage.setItem(CREATOR_STORAGE_KEY, u);
+      watermarkInput.value = `${u} • Gemini 4 Argon API`;
+      updateLabelsAndTweet();
+    });
 
     leftLabelInput.addEventListener('change', updateLabelsAndTweet);
     rightLabelInput.addEventListener('change', updateLabelsAndTweet);
@@ -2615,32 +2731,185 @@
     }
     animate();
 
-    // 1-Click Composite Video Recorder (.webm)
+    // Shared Composite Frame Renderer (Used by Video Recorder, PNG Download, Copy Image & Social Share)
+    function drawCompositeFrame(ctx) {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, 1280, 820);
+
+      // Top Funny Phrase Strip
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(0, 0, 1280, 42);
+      ctx.fillStyle = '#312e81';
+      ctx.font = '800 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(funnyPhraseBanner ? funnyPhraseBanner.textContent : '', 640, 27);
+
+      // Left & Right 3D Stages
+      ctx.drawImage(leftStage.renderer.domElement, 0, 100, 640, 720);
+      ctx.drawImage(rightStage.renderer.domElement, 640, 100, 640, 720);
+
+      // Dividers
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, 42);
+      ctx.lineTo(1280, 42);
+      ctx.moveTo(0, 100);
+      ctx.lineTo(1280, 100);
+      ctx.moveTo(640, 42);
+      ctx.lineTo(640, 820);
+      ctx.stroke();
+
+      // Left & Right Headers
+      ctx.fillStyle = '#1f2937';
+      ctx.font = '600 23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(leftTitleDisplay.textContent, 320, 79);
+      ctx.fillText(rightTitleDisplay.textContent, 960, 79);
+
+      // Roast Badges
+      if (showRoasts) {
+        ctx.font = '700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.fillStyle = '#b91c1c';
+        ctx.fillText(leftRoastBadge.textContent, 320, 132);
+        ctx.fillStyle = '#047857';
+        ctx.fillText(rightRoastBadge.textContent, 960, 132);
+      }
+
+      // Watermark
+      ctx.fillStyle = '#6b7280';
+      ctx.font = '600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(watermarkDisplay.textContent, 1256, 796);
+    }
+
+    async function getCompositeSnapshotBlob() {
+      leftStage.renderer.render(leftStage.scene, leftStage.camera);
+      rightStage.renderer.render(rightStage.scene, rightStage.camera);
+      const snapCanvas = document.createElement('canvas');
+      snapCanvas.width = 1280;
+      snapCanvas.height = 820;
+      drawCompositeFrame(snapCanvas.getContext('2d'));
+      return new Promise((resolve) => snapCanvas.toBlob(resolve, 'image/png'));
+    }
+
+    async function copySnapshotToClipboard() {
+      try {
+        const blob = await getCompositeSnapshotBlob();
+        if (navigator.clipboard && window.ClipboardItem && blob) {
+          await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+          return true;
+        }
+      } catch (e) {
+        console.warn('Clipboard image copy not supported in this context:', e);
+      }
+      return false;
+    }
+
+    document.getElementById('copyImgBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('copyImgBtn');
+      const ok = await copySnapshotToClipboard();
+      btn.textContent = ok ? '✅ Image Copied! (Press Ctrl+V)' : '⚠️ Use Download PNG';
+      setTimeout(() => { btn.textContent = '📸 Copy Image (Ctrl+V)'; }, 2500);
+    });
+
+    document.getElementById('downloadPngBtn').addEventListener('click', async () => {
+      const blob = await getCompositeSnapshotBlob();
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `benchmark_${sceneSelect.value}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    async function shareToX() {
+      await copySnapshotToClipboard();
+      const text = `${tweetTextDisplay.textContent}\n\nTry the 20-animal 3D benchmark arena: https://robinamirbahar.github.io/llm-3d-comedy-arena/`;
+      const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      window.open(xUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    async function shareToLinkedIn() {
+      await copySnapshotToClipboard();
+      const text = `${tweetTextDisplay.textContent}\n\nInteractive 3D LLM & DevOps Comedy Arena (20 Animals, Built with Gemini 4 Argon API):\nhttps://robinamirbahar.github.io/llm-3d-comedy-arena/`;
+      try { await navigator.clipboard.writeText(text); } catch (_) {}
+      const liUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
+      window.open(liUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    document.getElementById('shareXBtn').addEventListener('click', shareToX);
+    document.getElementById('footerShareXBtn').addEventListener('click', shareToX);
+    document.getElementById('shareLinkedInBtn').addEventListener('click', shareToLinkedIn);
+    document.getElementById('footerShareLinkedInBtn').addEventListener('click', shareToLinkedIn);
+
+    // 1-Click Composite Video Recorder (.mp4 preferred, .webm fallback)
+    let lastRecordedFile = null;
     const recordBtn = document.getElementById('recordBtn');
+    const videoDownloadBanner = document.getElementById('videoDownloadBanner');
+    const directVideoDownloadLink = document.getElementById('directVideoDownloadLink');
+    const videoReadyText = document.getElementById('videoReadyText');
+
+    function pickBestVideoMime() {
+      const candidates = [
+        { mime: 'video/mp4;codecs=avc1', ext: 'mp4' },
+        { mime: 'video/mp4', ext: 'mp4' },
+        { mime: 'video/webm;codecs=vp9', ext: 'webm' },
+        { mime: 'video/webm;codecs=vp8', ext: 'webm' },
+        { mime: 'video/webm', ext: 'webm' }
+      ];
+      if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported) {
+        for (const c of candidates) {
+          if (MediaRecorder.isTypeSupported(c.mime)) return c;
+        }
+      }
+      return { mime: '', ext: 'webm' };
+    }
+
     recordBtn.addEventListener('click', () => {
       const compCanvas = document.createElement('canvas');
       compCanvas.width = 1280;
-      compCanvas.height = 800;
+      compCanvas.height = 820;
       const ctx = compCanvas.getContext('2d');
 
       const stream = compCanvas.captureStream(60);
-      const recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+      const chosen = pickBestVideoMime();
+      const recorder = chosen.mime
+        ? new MediaRecorder(stream, { mimeType: chosen.mime })
+        : new MediaRecorder(stream);
       const chunks = [];
-      recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+      recorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) chunks.push(e.data); };
       recorder.onstop = () => {
-        const blob = new Blob(chunks, { type: 'video/webm' });
+        const blobType = chosen.mime || 'video/webm';
+        const blob = new Blob(chunks, { type: blobType });
         const url = URL.createObjectURL(blob);
+        const safeLeft = (leftTitleDisplay.textContent || 'Left').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const safeRight = (rightTitleDisplay.textContent || 'Right').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const fileName = `${safeLeft}_vs_${safeRight}_${sceneSelect.value}.${chosen.ext}`;
+
+        lastRecordedFile = new File([blob], fileName, { type: blobType });
+
+        directVideoDownloadLink.href = url;
+        directVideoDownloadLink.download = fileName;
+        videoReadyText.textContent = `✅ Recorded 8s Video (${fileName})! Click "⬇️ Download Video File" or "📲 Share Video File" to post on X / LinkedIn:`;
+        videoDownloadBanner.style.display = 'flex';
+
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${leftLabelInput.value.replace(/\s+/g, '_')}_vs_${rightLabelInput.value.replace(/\s+/g, '_')}_${sceneSelect.value}.webm`;
+        a.download = fileName;
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
+
         recordBtn.textContent = '⏺ Record 8s Video';
         recordBtn.disabled = false;
       };
 
       recordBtn.disabled = true;
       recordBtn.textContent = '🔴 Recording 8s...';
-      recorder.start();
+      recorder.start(200);
 
       const startTime = performance.now();
       function drawComposite() {
@@ -2648,43 +2917,26 @@
           recorder.stop();
           return;
         }
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, 1280, 800);
-
-        ctx.drawImage(leftStage.renderer.domElement, 0, 64, 640, 736);
-        ctx.drawImage(rightStage.renderer.domElement, 640, 64, 640, 736);
-
-        ctx.strokeStyle = '#e5e7eb';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(0, 64);
-        ctx.lineTo(1280, 64);
-        ctx.moveTo(640, 0);
-        ctx.lineTo(640, 800);
-        ctx.stroke();
-
-        ctx.fillStyle = '#1f2937';
-        ctx.font = '500 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(leftLabelInput.value, 320, 42);
-        ctx.fillText(rightLabelInput.value, 960, 42);
-
-        if (showRoasts) {
-          ctx.font = '700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-          ctx.fillStyle = '#b91c1c';
-          ctx.fillText(leftRoastBadge.textContent, 320, 98);
-          ctx.fillStyle = '#047857';
-          ctx.fillText(rightRoastBadge.textContent, 960, 98);
-        }
-
-        ctx.fillStyle = '#9ca3af';
-        ctx.font = '500 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.textAlign = 'right';
-        ctx.fillText(watermarkInput.value, 1254, 776);
-
+        drawCompositeFrame(ctx);
         requestAnimationFrame(drawComposite);
       }
       drawComposite();
+    });
+
+    document.getElementById('nativeShareVideoBtn').addEventListener('click', async () => {
+      if (lastRecordedFile && navigator.canShare && navigator.canShare({ files: [lastRecordedFile] })) {
+        try {
+          await navigator.share({
+            title: '3D LLM Comedy Benchmark Arena',
+            text: tweetTextDisplay.textContent,
+            files: [lastRecordedFile]
+          });
+          return;
+        } catch (e) {
+          console.warn('Web Share cancelled or failed:', e);
+        }
+      }
+      directVideoDownloadLink.click();
     });
   </script>
 </body>
