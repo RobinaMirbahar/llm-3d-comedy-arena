@@ -315,39 +315,53 @@
 </head>
 <body>
 
-  <!-- Top Header + Viral Matchup Dropdown -->
+  <!-- Top Header + Viral Matchup Dropdown with Placeholder Guide -->
   <div class="top-banner">
     <div class="brand">
       <span class="brand-badge">⚡ BUILT WITH GEMINI 4 ARGON API</span>
       <h1>3D LLM Comedy Benchmark Arena (20 Animals)</h1>
     </div>
-    <div class="field" style="flex-direction: row; align-items: center; gap: 10px;">
-      <label style="white-space: nowrap; font-size: 12px; color: #4338ca;">🔥 Quick Matchup Preset:</label>
-      <select id="matchupSelect" style="min-width: 310px; border-color: #c7d2fe; background: #eef2ff; color: #1e1b4b; font-weight: 700;">
-        <option value="Junior DevOps|Principal Architect (@RobinaMirbahar)" selected>Junior DevOps 💀 vs Principal Architect (@RobinaMirbahar) 👑</option>
-        <option value="Junior Dev Prompt|Principal Architect (@RobinaMirbahar)">Junior Dev Prompt vs Principal Architect (@RobinaMirbahar)</option>
-        <option value="Opus 5.5|Qwen 4">Introducing Qwen 4 😀 (Opus 5.5 vs Qwen 4)</option>
-        <option value="Claude 4.6 Opus|Qwen 4">Introducing Qwen 4 😀 (Claude 4.6 Opus vs Qwen 4)</option>
-        <option value="GPT-5.5 Turbo|Qwen 4 Max">GPT-5.5 Turbo vs Qwen 4 Max</option>
-        <option value="Opus 5.5|Gemini 4 Argon">Opus 5.5 vs Gemini 4 Argon</option>
-        <option value="Qwen 4|Gemini 4 Argon">Qwen 4 vs Gemini 4 Argon</option>
-        <option value="Claude 4.6 Opus|Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</option>
-        <option value="Opus 5.5|Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</option>
-        <option value="DeepSeek R2|Qwen 4 Coder">DeepSeek R2 vs Qwen 4 Coder</option>
-        <option value="GPT-5.5 Turbo|Gemma 4 31B-IT">GPT-5.5 Turbo vs Gemma 4 31B-IT</option>
-        <option value="My Code at 3 AM 💀|Qwen 4">3 AM Code 💀 vs Qwen 4 ✨</option>
-        <option value="My Code at 3 AM 💀|Gemini 4 Argon">3 AM Code 💀 vs Gemini 4 Argon ⚡</option>
-      </select>
+    <div class="field" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <label style="white-space: nowrap; font-size: 12px; color: #4338ca;">🔥 Quick Matchup Preset:</label>
+        <select id="matchupSelect" style="min-width: 340px; border-color: #c7d2fe; background: #eef2ff; color: #1e1b4b; font-weight: 700;">
+          <option value="" disabled>👇 Select a Viral Matchup Preset from Dropdown...</option>
+          <option value="Junior DevOps|Principal Architect (@RobinaMirbahar)" selected>Junior DevOps 💀 vs Principal Architect (@RobinaMirbahar) 👑</option>
+          <option value="Junior Dev Prompt|Principal Architect (@RobinaMirbahar)">Junior Dev Prompt vs Principal Architect (@RobinaMirbahar)</option>
+          <option value="Opus 5.5|Qwen 4">Introducing Qwen 4 😀 (Opus 5.5 vs Qwen 4)</option>
+          <option value="Claude 4.6 Opus|Qwen 4">Introducing Qwen 4 😀 (Claude 4.6 Opus vs Qwen 4)</option>
+          <option value="GPT-5.5 Turbo|Qwen 4 Max">GPT-5.5 Turbo vs Qwen 4 Max</option>
+          <option value="Opus 5.5|Gemini 4 Argon">Opus 5.5 vs Gemini 4 Argon</option>
+          <option value="Qwen 4|Gemini 4 Argon">Qwen 4 vs Gemini 4 Argon</option>
+          <option value="Claude 4.6 Opus|Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</option>
+          <option value="Opus 5.5|Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</option>
+          <option value="DeepSeek R2|Qwen 4 Coder">DeepSeek R2 vs Qwen 4 Coder</option>
+          <option value="GPT-5.5 Turbo|Gemma 4 31B-IT">GPT-5.5 Turbo vs Gemma 4 31B-IT</option>
+          <option value="My Code at 3 AM 💀|Qwen 4">3 AM Code 💀 vs Qwen 4 ✨</option>
+          <option value="My Code at 3 AM 💀|Gemini 4 Argon">3 AM Code 💀 vs Gemini 4 Argon ⚡</option>
+        </select>
+      </div>
+      <span style="font-size: 11px; color: #6366f1; font-weight: 600;">💡 Guide: Click dropdown above to switch presets, or pick any Left/Right Model & Animal below!</span>
     </div>
   </div>
 
-  <!-- Studio Controls (All Dropdowns) -->
+  <!-- Step-by-Step Placeholder Guide Strip -->
+  <div style="width: 100%; max-width: 1080px; background: #eef2ff; border: 1px dashed #a5b4fc; border-radius: 12px; padding: 8px 16px; margin-bottom: 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: #312e81;">
+    <span><strong>📖 Quick Studio Guide:</strong></span>
+    <span><strong>1️⃣</strong> Select <em>Quick Matchup</em> or <em>Left/Right Models</em> ▾</span>
+    <span><strong>2️⃣</strong> Select any of the <em>20 3D Animals</em> ▾</span>
+    <span><strong>3️⃣</strong> Paste your <em>Gemini API Key</em> (optional) for live AI roasts</span>
+    <span><strong>4️⃣</strong> Click <strong>⏺ Record 8s Video</strong> &amp; <strong>Copy Caption</strong>!</span>
+  </div>
+
+  <!-- Studio Controls (All Dropdowns with Placeholder Guides) -->
   <div class="toolbar">
     <div class="toolbar-group">
       <div class="field">
-        <label>🦓 Animal / Comedy Benchmark (20 Scenes)</label>
-        <select id="sceneSelect">
-          <option value="giraffe">🦒 1. Galloping Giraffe (Spaghetti Knees vs Majestic)</option>
+        <label>🦓 1. Select Animal Benchmark (20 Scenes)</label>
+        <select id="sceneSelect" title="Click to choose from 20 3D animal benchmarks">
+          <option value="" disabled>👇 Choose an Animal Benchmark (1–20)...</option>
+          <option value="giraffe" selected>🦒 1. Galloping Giraffe (Spaghetti Knees vs Majestic)</option>
           <option value="trex">🦖 2. T-Rex Trying to Sprint (Tiny Arms Panic vs Apex Predator)</option>
           <option value="cat">🐈 3. Orange Cat 3 AM Zoomies (Glitched Loaf vs Parkour Master)</option>
           <option value="duck">🦆 4. Duck Late for Standup (360° Head Spin vs Speed Waddle)</option>
@@ -371,8 +385,9 @@
       </div>
 
       <div class="field">
-        <label>Left Model (Dropdown)</label>
-        <select id="leftLabelInput" style="min-width: 175px;">
+        <label>👈 2. Select Left Model (Derpy)</label>
+        <select id="leftLabelInput" style="min-width: 175px;" title="Select the Left (derpy/blocky) model or role">
+          <option value="" disabled>👇 Choose Left Model / Role...</option>
           <option value="Junior DevOps" selected>Junior DevOps 💀</option>
           <option value="Junior Dev Prompt">Junior Dev Prompt</option>
           <option value="Opus 5.5">Opus 5.5</option>
@@ -394,8 +409,9 @@
       </div>
 
       <div class="field">
-        <label>Right Model (Dropdown)</label>
-        <select id="rightLabelInput" style="min-width: 185px;">
+        <label>👉 3. Select Right Model (Pro)</label>
+        <select id="rightLabelInput" style="min-width: 195px;" title="Select the Right (pro/smooth) model or role">
+          <option value="" disabled>👇 Choose Right Model / Role...</option>
           <option value="Principal Architect (@RobinaMirbahar)" selected>Principal Architect (@RobinaMirbahar) 👑</option>
           <option value="Qwen 4">Qwen 4 😀</option>
           <option value="Qwen 4 Max">Qwen 4 Max</option>
@@ -416,8 +432,9 @@
       </div>
 
       <div class="field">
-        <label>📣 Post Hook / Caption</label>
-        <select id="hookSelect" style="min-width: 190px;">
+        <label>📣 4. Select Post Hook / Caption</label>
+        <select id="hookSelect" style="min-width: 190px;" title="Choose the viral hook style for your post caption">
+          <option value="" disabled>👇 Choose Caption Hook Style...</option>
           <option value="qwen4_argon" selected>Introducing Qwen 4 😀 + Gemini 4 Argon API</option>
           <option value="qwen4">Introducing Qwen 4 😀</option>
           <option value="argon">Built with Gemini 4 Argon API ⚡</option>
@@ -426,8 +443,9 @@
       </div>
 
       <div class="field">
-        <label>⚡ Chaos / Speed</label>
+        <label>⚡ 5. Chaos / Speed</label>
         <select id="chaosSelect" style="min-width: 120px;">
+          <option value="" disabled>👇 Choose Speed...</option>
           <option value="1">1x Normal</option>
           <option value="1.65" selected>1.6x Funny</option>
           <option value="2.6">2.6x Derp Turbo</option>
@@ -436,8 +454,8 @@
       </div>
 
       <div class="field">
-        <label>Watermark</label>
-        <input id="watermarkInput" type="text" value="@RobinaMirbahar • Gemini 4 Argon API" style="min-width: 185px;" />
+        <label>🏷️ 6. Watermark Handle</label>
+        <input id="watermarkInput" type="text" placeholder="e.g. @RobinaMirbahar • Gemini 4 Argon API" value="@RobinaMirbahar • Gemini 4 Argon API" style="min-width: 185px;" />
       </div>
     </div>
 
@@ -2299,7 +2317,7 @@
       const nextScene = scenes[Math.floor(Math.random() * scenes.length)];
       sceneSelect.value = nextScene;
 
-      const opts = Array.from(matchupSelect.options);
+      const opts = Array.from(matchupSelect.options).filter((o) => !o.disabled && o.value);
       const randOpt = opts[Math.floor(Math.random() * opts.length)];
       matchupSelect.value = randOpt.value;
       const parts = randOpt.value.split('|');
