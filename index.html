@@ -537,7 +537,7 @@
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 6px;">
         <button class="btn" id="copyImgBtn" style="background: #f0fdf4; color: #166534; border-color: #bbf7d0;" title="Copy HD Comparison Snapshot to Clipboard (Paste with Ctrl+V on X or LinkedIn)">📸 Copy Image (Ctrl+V)</button>
-        <button class="btn" id="downloadPngBtn" title="Download HD PNG Image for X / LinkedIn">🖼️ Download PNG</button>
+        <button class="btn" id="downloadGifBtn" style="background: #7c3aed; color: #ffffff; border-color: #6d28d9;" title="Record & Download a Looping Animated .GIF for LinkedIn & X!">🎞️ Download Animated GIF</button>
         <button class="btn btn-record" id="recordBtn">⏺ Record 8s Video</button>
         <button class="btn" id="shareXBtn" style="background: #0f172a; color: #ffffff; border-color: #0f172a;">🐦 Share on X</button>
         <button class="btn" id="shareLinkedInBtn" style="background: #0a66c2; color: #ffffff; border-color: #0a66c2;">💼 Share on LinkedIn</button>
@@ -2821,28 +2821,80 @@
     document.getElementById('copyImgBtn').addEventListener('click', async () => {
       const btn = document.getElementById('copyImgBtn');
       const ok = await copySnapshotToClipboard();
-      btn.textContent = ok ? '✅ Image Copied! (Press Ctrl+V)' : '⚠️ Use Download PNG';
+      btn.textContent = ok ? '✅ Image Copied! (Press Ctrl+V)' : '⚠️ Click Download Animated GIF';
       setTimeout(() => { btn.textContent = '📸 Copy Image (Ctrl+V)'; }, 2500);
     });
 
-    document.getElementById('downloadPngBtn').addEventListener('click', async () => {
-      const blob = await getCompositeSnapshotBlob();
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `benchmark_${sceneSelect.value}.png`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    // 1-Click Looping Animated .GIF Recorder & Downloader (100% compatible with LinkedIn & X Photo Upload!)
+    const downloadGifBtn = document.getElementById('downloadGifBtn');
+    downloadGifBtn.addEventListener('click', async () => {
+      downloadGifBtn.disabled = true;
+      downloadGifBtn.textContent = '⏳ Recording GIF (0%)...';
+      try {
+        const { GIFEncoder, quantize, applyPalette } = await import('https://esm.sh/gifenc@1.0.3');
+        const gif = GIFEncoder();
+        const gifW = 800;
+        const gifH = 512;
+
+        const fullCanvas = document.createElement('canvas');
+        fullCanvas.width = 1280;
+        fullCanvas.height = 820;
+        const fullCtx = fullCanvas.getContext('2d');
+
+        const scaledCanvas = document.createElement('canvas');
+        scaledCanvas.width = gifW;
+        scaledCanvas.height = gifH;
+        const scaledCtx = scaledCanvas.getContext('2d', { willReadFrequently: true });
+
+        const totalFrames = 32;
+        for (let f = 0; f < totalFrames; f++) {
+          downloadGifBtn.textContent = `⏳ Encoding GIF (${Math.round(((f + 1) / totalFrames) * 100)}%)...`;
+          drawCompositeFrame(fullCtx);
+          scaledCtx.drawImage(fullCanvas, 0, 0, gifW, gifH);
+          const imgData = scaledCtx.getImageData(0, 0, gifW, gifH).data;
+          const palette = quantize(imgData, 256, { format: 'rgb444' });
+          const index = applyPalette(imgData, palette, 'rgb444');
+          gif.writeFrame(index, gifW, gifH, { palette, delay: 80 });
+          await new Promise((r) => setTimeout(r, 75));
+        }
+
+        gif.finish();
+        const bytes = gif.bytesView();
+        const blob = new Blob([bytes], { type: 'image/gif' });
+        const url = URL.createObjectURL(blob);
+
+        const safeLeft = (leftTitleDisplay.textContent || 'Left').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const safeRight = (rightTitleDisplay.textContent || 'Right').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const fileName = `${safeLeft}_vs_${safeRight}_${sceneSelect.value}.gif`;
+
+        lastRecordedFile = new File([blob], fileName, { type: 'image/gif' });
+        directVideoDownloadLink.href = url;
+        directVideoDownloadLink.download = fileName;
+        directVideoDownloadLink.textContent = '⬇️ Download Animated .GIF';
+        videoReadyText.textContent = `✅ Animated GIF Ready (${fileName})! Upload this .gif directly as an Image/Photo on LinkedIn or X:`;
+        videoDownloadBanner.style.display = 'flex';
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (err) {
+        console.error('GIF encoding error:', err);
+        alert('Could not encode GIF: ' + (err.message || err));
+      } finally {
+        downloadGifBtn.disabled = false;
+        downloadGifBtn.textContent = '🎞️ Download Animated GIF';
+      }
     });
 
     async function shareToX() {
       const copied = await copySnapshotToClipboard();
       if (videoDownloadBanner && videoReadyText) {
         videoReadyText.textContent = copied
-          ? '📸 HD 3D Snapshot copied to clipboard! In the X post window that opened, press Ctrl + V to paste the image!'
-          : '💡 Tip: Click "🖼️ Download PNG" or "⏺ Record 8s Video" and drag it into your X post!';
+          ? '📸 HD Snapshot copied (Ctrl+V), OR click "🎞️ Download Animated GIF" to upload a looping GIF on X!'
+          : '💡 Tip: Click "🎞️ Download Animated GIF" and upload the .gif directly to your X post!';
         videoDownloadBanner.style.display = 'flex';
       }
       const text = `${tweetTextDisplay.textContent}\n\nTry the 20-animal 3D benchmark arena: https://robinamirbahar.github.io/llm-3d-comedy-arena/`;
@@ -2854,8 +2906,8 @@
       const copied = await copySnapshotToClipboard();
       if (videoDownloadBanner && videoReadyText) {
         videoReadyText.textContent = copied
-          ? '📸 HD 3D Snapshot copied to clipboard! In the LinkedIn post window that opened, press Ctrl + V to paste the image!'
-          : '💡 Tip: Click "🖼️ Download PNG" or "⏺ Record 8s Video" and attach it to your LinkedIn post!';
+          ? '📸 HD Snapshot copied (Ctrl+V), OR click "🎞️ Download Animated GIF" to attach a looping GIF on LinkedIn!'
+          : '💡 Tip: Click "🎞️ Download Animated GIF" and attach the .gif to your LinkedIn post!';
         videoDownloadBanner.style.display = 'flex';
       }
       const text = `${tweetTextDisplay.textContent}\n\nInteractive 3D LLM & DevOps Comedy Arena (20 Animals, Built with Gemini 4 Argon API):\nhttps://robinamirbahar.github.io/llm-3d-comedy-arena/`;
