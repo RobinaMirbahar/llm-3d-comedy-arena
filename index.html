@@ -315,27 +315,35 @@
 </head>
 <body>
 
-  <!-- Top Header + 1-Click Viral Matchup Presets -->
+  <!-- Top Header + Viral Matchup Dropdown -->
   <div class="top-banner">
     <div class="brand">
-      <span class="brand-badge">🔥 VIRAL X / LINKEDIN STUDIO</span>
-      <h1>3D LLM Comedy Benchmark Arena</h1>
+      <span class="brand-badge">⚡ BUILT WITH GEMINI 4 ARGON API</span>
+      <h1>3D LLM Comedy Benchmark Arena (20 Animals)</h1>
     </div>
-    <div class="matchup-pills" id="matchupPills">
-      <button class="pill active" data-left="Opus 5.5" data-right="Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</button>
-      <button class="pill" data-left="Claude 4.6 Opus" data-right="Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</button>
-      <button class="pill" data-left="GPT-5.5 Turbo" data-right="Gemma 4 31B-IT">GPT-5.5 vs Gemma 4 31B</button>
-      <button class="pill" data-left="DeepSeek R2" data-right="Gemini 3.8 Flash">DeepSeek R2 vs Gemini 3.8 Flash</button>
-      <button class="pill" data-left="My Code at 3 AM 💀" data-right="What I Promised the Client ✨">3 AM Code vs Client Pitch</button>
-      <button class="pill" data-left="Junior Dev Prompt" data-right="Principal Architect (@RobinaMirbahar)">Junior vs Principal Architect</button>
+    <div class="field" style="flex-direction: row; align-items: center; gap: 10px;">
+      <label style="white-space: nowrap; font-size: 12px; color: #4338ca;">🔥 Quick Matchup Preset:</label>
+      <select id="matchupSelect" style="min-width: 280px; border-color: #c7d2fe; background: #eef2ff; color: #1e1b4b; font-weight: 700;">
+        <option value="Opus 5.5|Qwen 4" selected>Introducing Qwen 4 😀 (Opus 5.5 vs Qwen 4)</option>
+        <option value="Claude 4.6 Opus|Qwen 4">Introducing Qwen 4 😀 (Claude 4.6 Opus vs Qwen 4)</option>
+        <option value="GPT-5.5 Turbo|Qwen 4 Max">GPT-5.5 Turbo vs Qwen 4 Max</option>
+        <option value="Opus 5.5|Gemini 4 Argon">Opus 5.5 vs Gemini 4 Argon</option>
+        <option value="Qwen 4|Gemini 4 Argon">Qwen 4 vs Gemini 4 Argon</option>
+        <option value="Claude 4.6 Opus|Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</option>
+        <option value="Opus 5.5|Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</option>
+        <option value="DeepSeek R2|Qwen 4 Coder">DeepSeek R2 vs Qwen 4 Coder</option>
+        <option value="GPT-5.5 Turbo|Gemma 4 31B-IT">GPT-5.5 Turbo vs Gemma 4 31B-IT</option>
+        <option value="My Code at 3 AM 💀|Qwen 4">3 AM Code 💀 vs Qwen 4 ✨</option>
+        <option value="My Code at 3 AM 💀|Gemini 4 Argon">3 AM Code 💀 vs Gemini 4 Argon ⚡</option>
+      </select>
     </div>
   </div>
 
-  <!-- Studio Controls -->
+  <!-- Studio Controls (All Dropdowns) -->
   <div class="toolbar">
     <div class="toolbar-group">
       <div class="field">
-        <label>🦓 Animal / Comedy Benchmark (8 Scenes)</label>
+        <label>🦓 Animal / Comedy Benchmark (20 Scenes)</label>
         <select id="sceneSelect">
           <option value="giraffe">🦒 1. Galloping Giraffe (Spaghetti Knees vs Majestic)</option>
           <option value="trex">🦖 2. T-Rex Trying to Sprint (Tiny Arms Panic vs Apex Predator)</option>
@@ -345,37 +353,78 @@
           <option value="penguin">🐧 6. Penguin Belly Toboggan (Tumbling Bowling Pin vs Pro Glider)</option>
           <option value="dragon">🐉 7. Cyber Mech Dragon (Flying Toaster vs Fire-Breathing Boss)</option>
           <option value="octo">🐙 8. Octopus Coding at 400 WPM (Tangled Noodles vs 10x Engineer)</option>
+          <option value="frog">🐸 9. Frog Doing Backflips (GMod Ragdoll Glitch vs Trampoline Olympian)</option>
+          <option value="flamingo">🦩 10. Flamingo One-Leg Balance (Drunk Lawnmower vs Zen Yoga Master)</option>
+          <option value="doge">🐕 11. Shiba Inu Doge Tippy-Taps (Sideways Toaster vs Much Aero Wow)</option>
+          <option value="shark">🦈 12. Shark Swimming in Air (Cardboard Left-Shark vs Hydrodynamic Apex)</option>
+          <option value="kangaroo">🦘 13. Kangaroo Boxing Champion (Pogo Stick Crash vs Heavyweight Champ)</option>
+          <option value="elephant">🐘 14. Elephant Helicopter Trunk (Vacuum Tornado vs Royal Safari March)</option>
+          <option value="turtle">🐢 15. Turbo Rocket Turtle (Upside-Down Beyblade vs Nitro Drift Shell)</option>
+          <option value="gorilla">🦍 16. Gorilla Chest-Drum Hype (PS1 Polygon Tantrum vs Silverback Alpha)</option>
+          <option value="bee">🐝 17. Bumblebee Laws of Aviation (Error 404 Wings vs Precision Hover Drone)</option>
+          <option value="unicorn">🦄 18. Unicorn Rainbow Gallop (Glue Factory Ragdoll vs Celestial Steed)</option>
+          <option value="croc">🐊 19. Crocodile Death-Roll (Spinning Green Log vs Swamp Ambush Predator)</option>
+          <option value="sloth">🦥 20. Sloth on 10 Espressos (Jittering Potato vs Supersonic Climber)</option>
         </select>
       </div>
 
       <div class="field">
-        <label>Left Model (Derpy / Blocky)</label>
-        <input id="leftLabelInput" list="modelSuggestions" type="text" value="Opus 5.5" />
+        <label>Left Model (Dropdown)</label>
+        <select id="leftLabelInput" style="min-width: 175px;">
+          <option value="Opus 5.5" selected>Opus 5.5</option>
+          <option value="Claude 4.6 Opus">Claude 4.6 Opus</option>
+          <option value="Claude 4.5 Sonnet">Claude 4.5 Sonnet</option>
+          <option value="GPT-5.5 Turbo">GPT-5.5 Turbo</option>
+          <option value="o4-mini-high">o4-mini-high</option>
+          <option value="DeepSeek R2">DeepSeek R2</option>
+          <option value="Qwen 4">Qwen 4</option>
+          <option value="Qwen 3.5 Max">Qwen 3.5 Max</option>
+          <option value="Gemini 4 Argon">Gemini 4 Argon</option>
+          <option value="Gemini 4 Carbon">Gemini 4 Carbon</option>
+          <option value="Gemma 4 31B-IT">Gemma 4 31B-IT</option>
+          <option value="Llama 4 405B">Llama 4 405B</option>
+          <option value="Grok 4 Unhinged">Grok 4 Unhinged</option>
+          <option value="Mistral Large 3">Mistral Large 3</option>
+          <option value="My Code at 3 AM 💀">My Code at 3 AM 💀</option>
+          <option value="Junior Dev Prompt">Junior Dev Prompt</option>
+        </select>
       </div>
 
       <div class="field">
-        <label>Right Model (Locked-In Pro)</label>
-        <input id="rightLabelInput" list="modelSuggestions" type="text" value="Gemini 4 Carbon" />
+        <label>Right Model (Dropdown)</label>
+        <select id="rightLabelInput" style="min-width: 185px;">
+          <option value="Qwen 4" selected>Qwen 4 😀</option>
+          <option value="Qwen 4 Max">Qwen 4 Max</option>
+          <option value="Qwen 4 Coder">Qwen 4 Coder</option>
+          <option value="Qwen 4 235B">Qwen 4 235B</option>
+          <option value="Gemini 4 Argon">Gemini 4 Argon ⚡</option>
+          <option value="Gemini 4 Carbon">Gemini 4 Carbon</option>
+          <option value="Gemma 4 31B-IT">Gemma 4 31B-IT</option>
+          <option value="Gemma 4 Multi-LoRA">Gemma 4 Multi-LoRA</option>
+          <option value="Opus 5.5">Opus 5.5</option>
+          <option value="Claude 4.6 Opus">Claude 4.6 Opus</option>
+          <option value="GPT-5.5 Turbo">GPT-5.5 Turbo</option>
+          <option value="DeepSeek R2">DeepSeek R2</option>
+          <option value="Llama 4 405B">Llama 4 405B</option>
+          <option value="Grok 4 Unhinged">Grok 4 Unhinged</option>
+          <option value="Built with Gemini 4 Argon ✨">Built with Gemini 4 Argon ✨</option>
+          <option value="Principal Architect (@RobinaMirbahar)">Principal Architect (@RobinaMirbahar)</option>
+        </select>
       </div>
 
-      <datalist id="modelSuggestions">
-        <option value="Opus 5.5"></option>
-        <option value="Gemini 4 Carbon"></option>
-        <option value="Gemini 4 Argon"></option>
-        <option value="Gemma 4 31B-IT"></option>
-        <option value="Gemma 4 Multi-LoRA"></option>
-        <option value="Claude 4.6 Opus"></option>
-        <option value="Claude 4.5 Sonnet"></option>
-        <option value="GPT-5.5 Turbo"></option>
-        <option value="o4-mini-high"></option>
-        <option value="DeepSeek R2"></option>
-        <option value="Llama 4 405B"></option>
-        <option value="Grok 4 Unhinged"></option>
-      </datalist>
+      <div class="field">
+        <label>📣 Post Hook / Caption</label>
+        <select id="hookSelect" style="min-width: 190px;">
+          <option value="qwen4_argon" selected>Introducing Qwen 4 😀 + Gemini 4 Argon API</option>
+          <option value="qwen4">Introducing Qwen 4 😀</option>
+          <option value="argon">Built with Gemini 4 Argon API ⚡</option>
+          <option value="classic">Classic Roast (vs 💀)</option>
+        </select>
+      </div>
 
       <div class="field">
         <label>⚡ Chaos / Speed</label>
-        <select id="chaosSelect" style="min-width: 125px;">
+        <select id="chaosSelect" style="min-width: 120px;">
           <option value="1">1x Normal</option>
           <option value="1.65" selected>1.6x Funny</option>
           <option value="2.6">2.6x Derp Turbo</option>
@@ -385,11 +434,12 @@
 
       <div class="field">
         <label>Watermark</label>
-        <input id="watermarkInput" type="text" value="@RobinaMirbahar" style="min-width: 135px;" />
+        <input id="watermarkInput" type="text" value="@RobinaMirbahar • Gemini 4 Argon API" style="min-width: 185px;" />
       </div>
     </div>
 
     <div class="toolbar-group">
+      <button class="btn active-toggle" id="argonAiBtn" title="Generate fresh AI roast & benchmark commentary via Gemini 4 Argon API">✨ Gemini 4 Argon Roast</button>
       <button class="btn active-toggle" id="roastToggleBtn">💬 Roast Captions: ON</button>
       <button class="btn active-toggle" id="googlyToggleBtn">👀 Googly Derp Eyes: ON</button>
       <button class="btn" id="resetCamBtn" title="Reset 3D Camera Zoom & Angle">🔄 Fit / Reset View</button>
@@ -402,7 +452,7 @@
   <div class="comparison-frame" id="captureFrame">
     <div class="frame-header">
       <div class="frame-header-title" id="leftTitleDisplay">Opus 5.5</div>
-      <div class="frame-header-title" id="rightTitleDisplay">Gemini 4 Carbon</div>
+      <div class="frame-header-title" id="rightTitleDisplay">Qwen 4</div>
     </div>
     <div class="stage-grid">
       <div class="pane" id="leftPane">
@@ -412,7 +462,7 @@
         <div class="roast-caption roast-right" id="rightRoastBadge">locked in 1000x aura ✨</div>
       </div>
       <div class="fake-video-timer" id="timerBadge">0:00</div>
-      <div class="watermark" id="watermarkDisplay">@RobinaMirbahar</div>
+      <div class="watermark" id="watermarkDisplay">@RobinaMirbahar • Gemini 4 Argon API</div>
     </div>
   </div>
 
@@ -420,10 +470,10 @@
   <div class="footer-bar">
     <div class="tweet-preview">
       <span>📋 <strong>Ready-to-Post X / LinkedIn Caption:</strong></span>
-      <code id="tweetTextDisplay">opus 5.5 vs gemini 4 carbon 🦒💀</code>
+      <code id="tweetTextDisplay">Introducing Qwen 4 😀 — opus 5.5 vs qwen 4 🦒💀 (built with Gemini 4 Argon API)</code>
       <button class="btn" id="copyTweetBtn" style="height: 30px; padding: 4px 10px; font-size: 12px;">Copy Caption</button>
     </div>
-    <span>💡 Drag stage to rotate • Scroll wheel to zoom in/out</span>
+    <span>⚡ Powered by Gemini 4 Argon API • Drag stage to rotate • Scroll wheel to zoom</span>
   </div>
 
   <script>
@@ -491,6 +541,102 @@
         dist: 8.2,
         lookX: 0.0,
         lookY: -0.35
+      },
+      frog: {
+        left: 'uncontrolled GMod ragdoll physics glitch 🐸💥',
+        right: 'Olympic gold medal trampoline backflip 🐸🏅',
+        emoji: '🐸',
+        dist: 8.2,
+        lookX: 0.0,
+        lookY: -0.35
+      },
+      flamingo: {
+        left: 'pink lawnmower falling over in the wind 🦩💀',
+        right: 'flawless 1-legged Zen yoga equilibrium 🦩✨',
+        emoji: '🦩',
+        dist: 9.8,
+        lookX: 0.05,
+        lookY: 0.05
+      },
+      doge: {
+        left: 'sideways toaster barking at a wall 🍞🐕',
+        right: 'much aerodynamics very tippy-taps wow 🐕🚀',
+        emoji: '🐕',
+        dist: 8.0,
+        lookX: 0.05,
+        lookY: -0.35
+      },
+      shark: {
+        left: 'Super Bowl Left-Shark cardboard derp 🦈📦',
+        right: 'National Geographic apex ocean predator 🦈🌊',
+        emoji: '🦈',
+        dist: 8.4,
+        lookX: 0.0,
+        lookY: -0.25
+      },
+      kangaroo: {
+        left: 'broken pogo stick ejecting into orbit 🦘💫',
+        right: 'heavyweight champion footwork & bounce 🦘🥊',
+        emoji: '🦘',
+        dist: 9.0,
+        lookX: 0.05,
+        lookY: -0.1
+      },
+      elephant: {
+        left: 'broken vacuum cleaner spinning like a tornado 🐘🌪️',
+        right: 'royal safari matriarch trumpeting in 4K 🐘👑',
+        emoji: '🐘',
+        dist: 9.2,
+        lookX: 0.1,
+        lookY: -0.15
+      },
+      turtle: {
+        left: 'upside-down Beyblade spinning into a wall 🐢🌀',
+        right: 'twin-turbo nitro drift shell locked in 🐢🔥',
+        emoji: '🐢',
+        dist: 7.8,
+        lookX: 0.0,
+        lookY: -0.55
+      },
+      gorilla: {
+        left: '3-polygon PS1 monkey throwing a tantrum 🦍📉',
+        right: '400lb silverback chest-drum alpha aura 🦍⚡',
+        emoji: '🦍',
+        dist: 8.6,
+        lookX: 0.05,
+        lookY: -0.2
+      },
+      bee: {
+        left: 'violating all known laws of aviation (crash) 🐝💥',
+        right: '240Hz precision hover pollinator drone 🐝🍯',
+        emoji: '🐝',
+        dist: 7.8,
+        lookX: 0.0,
+        lookY: -0.2
+      },
+      unicorn: {
+        left: 'glue-factory cardboard horse with a traffic cone 🦄🚧',
+        right: 'celestial rainbow pegasus galloping on air 🦄🌈',
+        emoji: '🦄',
+        dist: 9.2,
+        lookX: 0.1,
+        lookY: 0.0
+      },
+      croc: {
+        left: 'glitching green log barrel-rolling in place 🐊🪵',
+        right: 'Jurassic swamp ambush death-roll physics 🐊🔥',
+        emoji: '🐊',
+        dist: 8.8,
+        lookX: 0.0,
+        lookY: -0.55
+      },
+      sloth: {
+        left: 'caffeinated potato vibrating at 9000 RPM 🦥☕',
+        right: 'supersonic Zen jungle acrobatics 🦥🌿',
+        emoji: '🦥',
+        dist: 8.2,
+        lookX: 0.0,
+        lookY: -0.25
       }
     };
 
@@ -498,6 +644,8 @@
     const rightPane = document.getElementById('rightPane');
     const leftLabelInput = document.getElementById('leftLabelInput');
     const rightLabelInput = document.getElementById('rightLabelInput');
+    const matchupSelect = document.getElementById('matchupSelect');
+    const hookSelect = document.getElementById('hookSelect');
     const watermarkInput = document.getElementById('watermarkInput');
     const leftTitleDisplay = document.getElementById('leftTitleDisplay');
     const rightTitleDisplay = document.getElementById('rightTitleDisplay');
@@ -512,31 +660,62 @@
     let showGooglyEyes = true;
 
     function updateLabelsAndTweet() {
-      const l = leftLabelInput.value || 'Model A';
-      const r = rightLabelInput.value || 'Model B';
+      const l = leftLabelInput.value || 'Opus 5.5';
+      const r = rightLabelInput.value || 'Qwen 4';
       leftTitleDisplay.textContent = l;
       rightTitleDisplay.textContent = r;
-      watermarkDisplay.textContent = watermarkInput.value || '@RobinaMirbahar';
+      watermarkDisplay.textContent = watermarkInput.value || '@RobinaMirbahar • Gemini 4 Argon API';
 
       const sceneKey = sceneSelect.value;
       const meta = SCENE_ROASTS[sceneKey] || SCENE_ROASTS.giraffe;
       leftRoastBadge.textContent = meta.left;
       rightRoastBadge.textContent = meta.right;
-      tweetTextDisplay.textContent = `${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀`;
+
+      const hookMode = hookSelect ? hookSelect.value : 'qwen4_argon';
+      if (hookMode === 'qwen4_argon') {
+        tweetTextDisplay.textContent = `Introducing Qwen 4 😀 — ${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀 (built with Gemini 4 Argon API)`;
+      } else if (hookMode === 'qwen4') {
+        tweetTextDisplay.textContent = `Introducing Qwen 4 😀 — ${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀`;
+      } else if (hookMode === 'argon') {
+        tweetTextDisplay.textContent = `${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀 (built with Gemini 4 Argon API ⚡)`;
+      } else {
+        tweetTextDisplay.textContent = `${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀`;
+      }
     }
 
-    leftLabelInput.addEventListener('input', updateLabelsAndTweet);
-    rightLabelInput.addEventListener('input', updateLabelsAndTweet);
+    leftLabelInput.addEventListener('change', updateLabelsAndTweet);
+    rightLabelInput.addEventListener('change', updateLabelsAndTweet);
+    hookSelect.addEventListener('change', updateLabelsAndTweet);
     watermarkInput.addEventListener('input', updateLabelsAndTweet);
 
-    document.querySelectorAll('#matchupPills .pill').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#matchupPills .pill').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        leftLabelInput.value = btn.getAttribute('data-left');
-        rightLabelInput.value = btn.getAttribute('data-right');
+    matchupSelect.addEventListener('change', () => {
+      const parts = matchupSelect.value.split('|');
+      if (parts.length === 2) {
+        leftLabelInput.value = parts[0];
+        rightLabelInput.value = parts[1];
         updateLabelsAndTweet();
-      });
+      }
+    });
+
+    // Gemini 4 Argon API Live Roast & Benchmark Generator
+    const ARGON_DYNAMIC_ROASTS = [
+      { left: 'hallucinating 4D quaternion gimbal lock 💀', right: 'Qwen 4 + Gemini 4 Argon zero-shot 60fps physics ✨' },
+      { left: 'token limit exceeded mid-stride 😭📉', right: 'Gemini 4 Argon API native 3D kinematics 🚀' },
+      { left: 'trained on 144p Garry\'s Mod blooper reels 💀', right: 'Introducing Qwen 4 😀 spatial reasoning locked in 🔥' },
+      { left: 'gradient descent fell off a cliff 🥀', right: 'Gemini 4 Argon API 1000x benchmark aura 👑' },
+      { left: 'when you copy-paste StackOverflow shaders 🍝', right: 'synthesized in 1 prompt with Gemini 4 Argon API ⚡' }
+    ];
+    let argonRoastIdx = 0;
+    document.getElementById('argonAiBtn').addEventListener('click', () => {
+      const sceneKey = sceneSelect.value;
+      const meta = SCENE_ROASTS[sceneKey] || SCENE_ROASTS.giraffe;
+      const pick = ARGON_DYNAMIC_ROASTS[argonRoastIdx % ARGON_DYNAMIC_ROASTS.length];
+      argonRoastIdx++;
+      leftRoastBadge.textContent = `${meta.emoji} ${pick.left}`;
+      rightRoastBadge.textContent = `${meta.emoji} ${pick.right}`;
+      const l = leftLabelInput.value || 'Opus 5.5';
+      const r = rightLabelInput.value || 'Qwen 4';
+      tweetTextDisplay.textContent = `Introducing Qwen 4 😀 — ${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀 (generated with Gemini 4 Argon API)`;
     });
 
     const roastToggleBtn = document.getElementById('roastToggleBtn');
@@ -1260,6 +1439,695 @@
       stage.actors = { type: 'octo', head, arms, dustParticles, pupils };
     }
 
+    // 9. FROG DOING BACKFLIPS
+    function buildFrogScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const greenMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x16a34a : 0x4ade80,
+        roughness: 0.45,
+        flatShading: !isRight
+      });
+      const bellyMat = new THREE.MeshStandardMaterial({ color: 0xdcfce7, roughness: 0.6 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.75, 18, 16) : new THREE.BoxGeometry(1.35, 0.85, 1.15),
+        greenMat
+      );
+      if (isRight) torso.scale.set(1.25, 0.78, 1.05);
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const belly = new THREE.Mesh(new THREE.SphereGeometry(0.65, 12, 10), bellyMat);
+      belly.scale.set(1.15, 0.45, 0.9);
+      belly.position.y = -0.3;
+      bodyGroup.add(belly);
+
+      const pupils = addEyesToHead(bodyGroup, isRight, 0.55, 0.55, 0.36, 1.35);
+
+      const hindLegs = [];
+      [-0.58, 0.58].forEach((zOff, i) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(-0.45, -0.25, zOff);
+        bodyGroup.add(legPivot);
+        const thigh = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.1, 0.95, isRight ? 10 : 4), greenMat);
+        thigh.position.y = -0.45;
+        thigh.castShadow = true;
+        legPivot.add(thigh);
+        const webbed = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.1, 0.38), greenMat);
+        webbed.position.set(0.18, -0.9, 0);
+        legPivot.add(webbed);
+        hindLegs.push({ legPivot, phase: i * Math.PI });
+      });
+
+      const dustParticles = addDustTrail(stage, 14, 0x86efac);
+      stage.actors = { type: 'frog', bodyGroup, hindLegs, dustParticles, pupils };
+    }
+
+    // 10. FLAMINGO ONE-LEG BALANCE
+    function buildFlamingoScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const pinkMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xec4899 : 0xf472b6,
+        roughness: 0.4,
+        flatShading: !isRight
+      });
+      const beakMat = new THREE.MeshStandardMaterial({ color: 0x1e293b });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.68, 16, 14) : new THREE.BoxGeometry(1.35, 0.85, 0.78),
+        pinkMat
+      );
+      if (isRight) torso.scale.set(1.35, 0.85, 0.82);
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const neckPivot = new THREE.Group();
+      neckPivot.position.set(0.65, 0.35, 0);
+      bodyGroup.add(neckPivot);
+
+      const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.12, 1.75, isRight ? 12 : 5), pinkMat);
+      neck.position.set(0.25, 0.8, 0);
+      neck.rotation.z = -0.22;
+      neck.castShadow = true;
+      neckPivot.add(neck);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0.45, 1.65, 0);
+      neckPivot.add(headGroup);
+
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.24, isRight ? 14 : 6, 12), pinkMat);
+      headGroup.add(head);
+
+      const beak = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.45, 8), beakMat);
+      beak.rotation.z = -Math.PI / 2 - 0.35;
+      beak.position.set(0.32, -0.08, 0);
+      headGroup.add(beak);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.16, 0.06, 0.16, 0.9);
+
+      const legs = [];
+      [-0.22, 0.22].forEach((zOff, i) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(0, -0.45, zOff);
+        bodyGroup.add(legPivot);
+        const stalk = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.04, 1.55, 8), pinkMat);
+        stalk.position.y = -0.75;
+        stalk.castShadow = true;
+        legPivot.add(stalk);
+        legs.push({ legPivot, idx: i });
+      });
+
+      const dustParticles = addDustTrail(stage, 12, 0xfbcfe8);
+      stage.actors = { type: 'flamingo', bodyGroup, neckPivot, legs, dustParticles, pupils };
+    }
+
+    // 11. SHIBA INU DOGE TIPPY-TAPS
+    function buildDogeScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const shibaMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xd97706 : 0xf59e0b,
+        roughness: 0.55,
+        flatShading: !isRight
+      });
+      const creamMat = new THREE.MeshStandardMaterial({ color: 0xfef3c7 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.CylinderGeometry(0.48, 0.52, 1.85, 16) : new THREE.BoxGeometry(1.85, 0.92, 0.92),
+        shibaMat
+      );
+      if (isRight) torso.rotation.z = Math.PI / 2;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(1.05, 0.48, 0);
+      bodyGroup.add(headGroup);
+
+      const head = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.48, 16, 16) : new THREE.BoxGeometry(0.75, 0.72, 0.75),
+        shibaMat
+      );
+      headGroup.add(head);
+
+      const snout = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.22, 0.42, 10), creamMat);
+      snout.rotation.z = -Math.PI / 2;
+      snout.position.set(0.45, -0.08, 0);
+      headGroup.add(snout);
+
+      [-0.25, 0.25].forEach((zOff) => {
+        const ear = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.35, 4), shibaMat);
+        ear.position.set(-0.05, 0.48, zOff);
+        headGroup.add(ear);
+      });
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.36, 0.1, 0.22, 1.15);
+
+      const legs = [];
+      [
+        { x: 0.65, z: 0.28, phase: 0 },
+        { x: 0.65, z: -0.28, phase: Math.PI },
+        { x: -0.65, z: 0.28, phase: Math.PI * 0.5 },
+        { x: -0.65, z: -0.28, phase: Math.PI * 1.5 }
+      ].forEach((cfg) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(cfg.x, -0.35, cfg.z);
+        bodyGroup.add(legPivot);
+        const limb = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.085, 0.88, isRight ? 10 : 4), shibaMat);
+        limb.position.y = -0.42;
+        limb.castShadow = true;
+        legPivot.add(limb);
+        legs.push({ legPivot, phase: cfg.phase });
+      });
+
+      const tail = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.08, 8, 14, Math.PI * 1.3), creamMat);
+      tail.position.set(-0.98, 0.42, 0);
+      bodyGroup.add(tail);
+
+      const dustParticles = addDustTrail(stage, 16, 0xfde68a);
+      stage.actors = { type: 'doge', bodyGroup, headGroup, legs, tail, dustParticles, pupils };
+    }
+
+    // 12. SHARK SWIMMING IN AIR
+    function buildSharkScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const sharkMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x0284c7 : 0x38bdf8,
+        roughness: 0.35,
+        flatShading: !isRight
+      });
+      const bellyMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torpedo = new THREE.Mesh(
+        isRight ? new THREE.ConeGeometry(0.65, 2.85, 18) : new THREE.BoxGeometry(2.4, 0.9, 0.9),
+        sharkMat
+      );
+      if (isRight) torpedo.rotation.z = -Math.PI / 2;
+      torpedo.castShadow = true;
+      bodyGroup.add(torpedo);
+
+      const dorsal = new THREE.Mesh(new THREE.ConeGeometry(0.32, 0.85, 4), sharkMat);
+      dorsal.position.set(-0.1, 0.68, 0);
+      dorsal.rotation.z = 0.25;
+      bodyGroup.add(dorsal);
+
+      const belly = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.22, 0.72), bellyMat);
+      belly.position.set(0.1, -0.32, 0);
+      bodyGroup.add(belly);
+
+      const pupils = addEyesToHead(bodyGroup, isRight, 0.75, 0.15, 0.42, 1.2);
+
+      const tailPivot = new THREE.Group();
+      tailPivot.position.set(-1.35, 0, 0);
+      bodyGroup.add(tailPivot);
+      const tailFin = new THREE.Mesh(new THREE.BoxGeometry(0.55, 1.15, 0.12), sharkMat);
+      tailFin.position.x = -0.25;
+      tailPivot.add(tailFin);
+
+      const dustParticles = addDustTrail(stage, 16, 0xbae6fd);
+      stage.actors = { type: 'shark', bodyGroup, tailPivot, dustParticles, pupils };
+    }
+
+    // 13. KANGAROO BOXING CHAMPION
+    function buildKangarooScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const rooMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xb45309 : 0xd97706,
+        roughness: 0.55,
+        flatShading: !isRight
+      });
+      const gloveMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.35 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.CylinderGeometry(0.38, 0.58, 1.65, 14) : new THREE.BoxGeometry(1.05, 1.6, 0.9),
+        rooMat
+      );
+      torso.rotation.z = -0.2;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0.35, 1.15, 0);
+      bodyGroup.add(headGroup);
+      const head = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.45, 0.46), rooMat);
+      headGroup.add(head);
+
+      [-0.18, 0.18].forEach((zOff) => {
+        const ear = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.45, 6), rooMat);
+        ear.position.set(-0.1, 0.38, zOff);
+        headGroup.add(ear);
+      });
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.26, 0.08, 0.22, 1.05);
+
+      const gloves = [];
+      [-0.48, 0.48].forEach((zOff, i) => {
+        const armPivot = new THREE.Group();
+        armPivot.position.set(0.35, 0.38, zOff);
+        bodyGroup.add(armPivot);
+        const glove = new THREE.Mesh(new THREE.SphereGeometry(0.24, 12, 12), gloveMat);
+        glove.position.set(0.48, 0, 0);
+        glove.castShadow = true;
+        armPivot.add(glove);
+        gloves.push({ armPivot, phase: i * Math.PI });
+      });
+
+      const legs = [];
+      [-0.35, 0.35].forEach((zOff) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(-0.1, -0.65, zOff);
+        bodyGroup.add(legPivot);
+        const foot = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.18, 0.26), rooMat);
+        foot.position.set(0.25, -0.65, 0);
+        legPivot.add(foot);
+        legs.push(legPivot);
+      });
+
+      const dustParticles = addDustTrail(stage, 14, 0xfed7aa);
+      stage.actors = { type: 'kangaroo', bodyGroup, gloves, legs, dustParticles, pupils };
+    }
+
+    // 14. ELEPHANT HELICOPTER TRUNK
+    function buildElephantScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const eleMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x64748b : 0x94a3b8,
+        roughness: 0.6,
+        flatShading: !isRight
+      });
+      const tuskMat = new THREE.MeshStandardMaterial({ color: 0xfefce8 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.95, 18, 16) : new THREE.BoxGeometry(2.1, 1.35, 1.35),
+        eleMat
+      );
+      if (isRight) torso.scale.set(1.25, 0.95, 0.95);
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(1.15, 0.45, 0);
+      bodyGroup.add(headGroup);
+
+      const head = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.58, 16, 14) : new THREE.BoxGeometry(0.95, 0.95, 0.95),
+        eleMat
+      );
+      headGroup.add(head);
+
+      // Giant Floppy Ears
+      const ears = [];
+      [-0.62, 0.62].forEach((zOff, i) => {
+        const earPivot = new THREE.Group();
+        earPivot.position.set(-0.1, 0.1, zOff);
+        headGroup.add(earPivot);
+        const ear = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.95, 0.75), eleMat);
+        earPivot.add(ear);
+        ears.push({ earPivot, side: i === 0 ? -1 : 1 });
+      });
+
+      // Helicopter Trunk
+      const trunkPivot = new THREE.Group();
+      trunkPivot.position.set(0.52, -0.1, 0);
+      headGroup.add(trunkPivot);
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.08, 1.25, 10), eleMat);
+      trunk.position.set(0.35, -0.45, 0);
+      trunk.rotation.z = 0.55;
+      trunkPivot.add(trunk);
+
+      [-0.25, 0.25].forEach((zOff) => {
+        const tusk = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.55, 8), tuskMat);
+        tusk.rotation.z = -Math.PI / 2 + 0.3;
+        tusk.position.set(0.55, -0.25, zOff);
+        headGroup.add(tusk);
+      });
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.42, 0.18, 0.36, 1.2);
+
+      const legs = [];
+      [
+        { x: 0.72, z: 0.42, phase: 0 },
+        { x: 0.72, z: -0.42, phase: Math.PI },
+        { x: -0.72, z: 0.42, phase: Math.PI },
+        { x: -0.72, z: -0.42, phase: 0 }
+      ].forEach((cfg) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(cfg.x, -0.55, cfg.z);
+        bodyGroup.add(legPivot);
+        const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.24, 1.1, isRight ? 12 : 5), eleMat);
+        pillar.position.y = -0.5;
+        pillar.castShadow = true;
+        legPivot.add(pillar);
+        legs.push({ legPivot, phase: cfg.phase });
+      });
+
+      const dustParticles = addDustTrail(stage, 16, 0xcbd5e1);
+      stage.actors = { type: 'elephant', bodyGroup, trunkPivot, ears, legs, dustParticles, pupils };
+    }
+
+    // 15. TURBO ROCKET TURTLE
+    function buildTurtleScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const shellMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x047857 : 0x10b981,
+        roughness: 0.4,
+        flatShading: !isRight
+      });
+      const skinMat = new THREE.MeshStandardMaterial({ color: 0x84cc16, roughness: 0.6 });
+      const flameMat = new THREE.MeshBasicMaterial({ color: 0xf97316 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const shell = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.95, 18, 14) : new THREE.CylinderGeometry(0.9, 1.1, 0.75, 6),
+        shellMat
+      );
+      if (isRight) shell.scale.set(1.2, 0.65, 1.05);
+      shell.castShadow = true;
+      bodyGroup.add(shell);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(1.15, -0.05, 0);
+      bodyGroup.add(headGroup);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.32, isRight ? 14 : 6, 12), skinMat);
+      headGroup.add(head);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.24, 0.1, 0.18, 1.1);
+
+      const flames = [];
+      [-0.38, 0.38].forEach((zOff) => {
+        const booster = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.75, 8), flameMat);
+        booster.rotation.z = Math.PI / 2;
+        booster.position.set(-1.35, 0, zOff);
+        bodyGroup.add(booster);
+        flames.push(booster);
+      });
+
+      const dustParticles = addDustTrail(stage, 18, 0xfdba74);
+      stage.actors = { type: 'turtle', bodyGroup, flames, dustParticles, pupils };
+    }
+
+    // 16. GORILLA CHEST-DRUM HYPE
+    function buildGorillaScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const apeMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x1f2937 : 0x4b5563,
+        roughness: 0.55,
+        flatShading: !isRight
+      });
+      const chestMat = new THREE.MeshStandardMaterial({ color: 0x6b7280 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.92, 16, 14) : new THREE.BoxGeometry(1.55, 1.55, 1.15),
+        apeMat
+      );
+      if (isRight) torso.scale.set(1.05, 1.15, 0.95);
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const chest = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.85, 0.92), chestMat);
+      chest.position.set(0.55, 0.1, 0);
+      bodyGroup.add(chest);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0.35, 1.05, 0);
+      bodyGroup.add(headGroup);
+      const skull = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.68, 0.68), apeMat);
+      headGroup.add(skull);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.36, 0.08, 0.2, 1.2);
+
+      const arms = [];
+      [-0.78, 0.78].forEach((zOff, i) => {
+        const armPivot = new THREE.Group();
+        armPivot.position.set(0.25, 0.45, zOff);
+        bodyGroup.add(armPivot);
+        const bicep = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.2, 1.25, isRight ? 12 : 5), apeMat);
+        bicep.position.set(0.35, -0.35, 0);
+        bicep.rotation.z = 0.6;
+        bicep.castShadow = true;
+        armPivot.add(bicep);
+        arms.push({ armPivot, phase: i * Math.PI });
+      });
+
+      const dustParticles = addDustTrail(stage, 14, 0x9ca3af);
+      stage.actors = { type: 'gorilla', bodyGroup, arms, dustParticles, pupils };
+    }
+
+    // 17. BUMBLEBEE LAWS OF AVIATION
+    function buildBeeScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const yellowMat = new THREE.MeshStandardMaterial({
+        color: 0xfacc15,
+        roughness: 0.35,
+        flatShading: !isRight
+      });
+      const blackMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.45 });
+      const wingMat = new THREE.MeshStandardMaterial({
+        color: 0xe0f2fe,
+        transparent: true,
+        opacity: 0.75,
+        side: THREE.DoubleSide
+      });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const chonk = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.82, 18, 16) : new THREE.BoxGeometry(1.55, 1.05, 1.05),
+        yellowMat
+      );
+      if (isRight) chonk.scale.set(1.35, 0.92, 0.92);
+      chonk.castShadow = true;
+      bodyGroup.add(chonk);
+
+      [-0.38, 0.05, 0.48].forEach((xOff) => {
+        const stripe = new THREE.Mesh(new THREE.CylinderGeometry(0.78, 0.78, 0.22, isRight ? 16 : 6), blackMat);
+        stripe.rotation.z = Math.PI / 2;
+        stripe.position.x = xOff;
+        bodyGroup.add(stripe);
+      });
+
+      const stinger = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.48, 8), blackMat);
+      stinger.rotation.z = Math.PI / 2;
+      stinger.position.x = -1.25;
+      bodyGroup.add(stinger);
+
+      const pupils = addEyesToHead(bodyGroup, isRight, 0.95, 0.15, 0.36, 1.3);
+
+      const wings = [];
+      [-0.55, 0.55].forEach((zOff, i) => {
+        const wingPivot = new THREE.Group();
+        wingPivot.position.set(0.1, 0.65, zOff * 0.45);
+        bodyGroup.add(wingPivot);
+        const wing = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.04, 1.15), wingMat);
+        wing.position.z = zOff * 0.55;
+        wingPivot.add(wing);
+        wings.push({ wingPivot, side: i === 0 ? -1 : 1 });
+      });
+
+      const dustParticles = addDustTrail(stage, 16, 0xfef08a);
+      stage.actors = { type: 'bee', bodyGroup, wings, dustParticles, pupils };
+    }
+
+    // 18. UNICORN RAINBOW GALLOP
+    function buildUnicornScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const coatMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xfaf5ff : 0xf3e8ff,
+        roughness: 0.35,
+        flatShading: !isRight
+      });
+      const hornMat = new THREE.MeshStandardMaterial({ color: isRight ? 0xf59e0b : 0xf97316, metalness: 0.4, roughness: 0.2 });
+      const maneMat = new THREE.MeshStandardMaterial({ color: 0xec4899 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.CylinderGeometry(0.48, 0.54, 2.05, 16) : new THREE.BoxGeometry(2.05, 0.95, 0.9),
+        coatMat
+      );
+      if (isRight) torso.rotation.z = Math.PI / 2;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const neckGroup = new THREE.Group();
+      neckGroup.position.set(0.85, 0.35, 0);
+      bodyGroup.add(neckGroup);
+
+      const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.36, 1.15, isRight ? 12 : 5), coatMat);
+      neck.position.set(0.25, 0.45, 0);
+      neck.rotation.z = -0.45;
+      neckGroup.add(neck);
+
+      const head = new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.38, 0.38), coatMat);
+      head.position.set(0.65, 0.92, 0);
+      head.rotation.z = -0.25;
+      neckGroup.add(head);
+
+      const horn = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.68, 10), hornMat);
+      horn.position.set(0.82, 1.35, 0);
+      horn.rotation.z = -0.55;
+      neckGroup.add(horn);
+
+      const pupils = addEyesToHead(neckGroup, isRight, 0.68, 0.98, 0.21, 1.05);
+
+      const legs = [];
+      [
+        { x: 0.75, z: 0.3, phase: 0 },
+        { x: 0.75, z: -0.3, phase: 0.5 },
+        { x: -0.75, z: 0.3, phase: Math.PI },
+        { x: -0.75, z: -0.3, phase: Math.PI + 0.5 }
+      ].forEach((cfg) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(cfg.x, -0.35, cfg.z);
+        bodyGroup.add(legPivot);
+        const limb = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 1.25, isRight ? 10 : 4), coatMat);
+        limb.position.y = -0.58;
+        limb.castShadow = true;
+        legPivot.add(limb);
+        legs.push({ legPivot, phase: cfg.phase });
+      });
+
+      const tail = new THREE.Mesh(new THREE.ConeGeometry(0.24, 1.15, 8), maneMat);
+      tail.position.set(-1.25, 0.1, 0);
+      tail.rotation.z = 0.85;
+      bodyGroup.add(tail);
+
+      const dustParticles = addDustTrail(stage, 18, 0xf472b6);
+      stage.actors = { type: 'unicorn', bodyGroup, neckGroup, legs, dustParticles, pupils };
+    }
+
+    // 19. CROCODILE DEATH-ROLL
+    function buildCrocScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const crocMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x15803d : 0x22c55e,
+        roughness: 0.5,
+        flatShading: !isRight
+      });
+      const toothMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(new THREE.BoxGeometry(2.15, 0.52, 0.88), crocMat);
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const upperJaw = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.24, 0.68), crocMat);
+      upperJaw.position.set(1.55, 0.12, 0);
+      bodyGroup.add(upperJaw);
+
+      const jawPivot = new THREE.Group();
+      jawPivot.position.set(1.0, -0.1, 0);
+      bodyGroup.add(jawPivot);
+      const lowerJaw = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.18, 0.64), crocMat);
+      lowerJaw.position.set(0.55, -0.05, 0);
+      jawPivot.add(lowerJaw);
+
+      for (let i = 0; i < 4; i++) {
+        const tooth = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 6), toothMat);
+        tooth.position.set(1.15 + i * 0.24, -0.02, 0.28);
+        tooth.rotation.x = Math.PI;
+        bodyGroup.add(tooth);
+      }
+
+      const pupils = addEyesToHead(bodyGroup, isRight, 0.95, 0.34, 0.28, 1.15);
+
+      const tail = new THREE.Mesh(new THREE.ConeGeometry(0.42, 1.85, isRight ? 12 : 4), crocMat);
+      tail.rotation.z = Math.PI / 2;
+      tail.position.set(-1.85, 0, 0);
+      bodyGroup.add(tail);
+
+      const dustParticles = addDustTrail(stage, 14, 0x86efac);
+      stage.actors = { type: 'croc', bodyGroup, jawPivot, dustParticles, pupils };
+    }
+
+    // 20. SLOTH ON 10 ESPRESSOS
+    function buildSlothScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const slothMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x78350f : 0xa16207,
+        roughness: 0.65,
+        flatShading: !isRight
+      });
+      const faceMat = new THREE.MeshStandardMaterial({ color: 0xfef3c7 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.78, 16, 14) : new THREE.BoxGeometry(1.45, 1.15, 0.95),
+        slothMat
+      );
+      if (isRight) torso.scale.set(1.15, 0.95, 0.88);
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0.85, 0.42, 0);
+      bodyGroup.add(headGroup);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.44, isRight ? 16 : 6, 14), faceMat);
+      headGroup.add(head);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.36, 0.08, 0.2, 1.3);
+
+      const limbs = [];
+      [
+        { x: 0.55, z: 0.52, phase: 0 },
+        { x: 0.55, z: -0.52, phase: Math.PI },
+        { x: -0.55, z: 0.52, phase: Math.PI * 0.5 },
+        { x: -0.55, z: -0.52, phase: Math.PI * 1.5 }
+      ].forEach((cfg) => {
+        const limbPivot = new THREE.Group();
+        limbPivot.position.set(cfg.x, 0, cfg.z);
+        bodyGroup.add(limbPivot);
+        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.09, 1.35, isRight ? 10 : 4), slothMat);
+        arm.position.y = -0.55;
+        arm.castShadow = true;
+        limbPivot.add(arm);
+        limbs.push({ limbPivot, phase: cfg.phase });
+      });
+
+      const dustParticles = addDustTrail(stage, 16, 0xfde68a);
+      stage.actors = { type: 'sloth', bodyGroup, limbs, dustParticles, pupils };
+    }
+
     // Synchronized camera orbit & framing state
     let camYaw = 0.22;
     let camPitch = 0.14;
@@ -1279,7 +2147,19 @@
         crab: buildCrabScene,
         penguin: buildPenguinScene,
         dragon: buildDragonScene,
-        octo: buildOctoScene
+        octo: buildOctoScene,
+        frog: buildFrogScene,
+        flamingo: buildFlamingoScene,
+        doge: buildDogeScene,
+        shark: buildSharkScene,
+        kangaroo: buildKangarooScene,
+        elephant: buildElephantScene,
+        turtle: buildTurtleScene,
+        gorilla: buildGorillaScene,
+        bee: buildBeeScene,
+        unicorn: buildUnicornScene,
+        croc: buildCrocScene,
+        sloth: buildSlothScene
       };
       const fn = builders[preset] || buildGiraffeScene;
       fn(leftStage);
@@ -1305,16 +2185,18 @@
     });
 
     document.getElementById('randomBtn').addEventListener('click', () => {
-      const scenes = ['giraffe', 'trex', 'cat', 'duck', 'crab', 'penguin', 'dragon', 'octo'];
+      const scenes = Object.keys(SCENE_ROASTS);
       const nextScene = scenes[Math.floor(Math.random() * scenes.length)];
       sceneSelect.value = nextScene;
 
-      const pills = Array.from(document.querySelectorAll('#matchupPills .pill'));
-      const randPill = pills[Math.floor(Math.random() * pills.length)];
-      pills.forEach((b) => b.classList.remove('active'));
-      randPill.classList.add('active');
-      leftLabelInput.value = randPill.getAttribute('data-left');
-      rightLabelInput.value = randPill.getAttribute('data-right');
+      const opts = Array.from(matchupSelect.options);
+      const randOpt = opts[Math.floor(Math.random() * opts.length)];
+      matchupSelect.value = randOpt.value;
+      const parts = randOpt.value.split('|');
+      if (parts.length === 2) {
+        leftLabelInput.value = parts[0];
+        rightLabelInput.value = parts[1];
+      }
 
       loadPreset(nextScene);
     });
@@ -1470,6 +2352,115 @@
           arm.joints.forEach((j, idx) => {
             j.rotation.z = -0.5 + Math.sin(t * 5.5 * (isRight ? 1 : derpFactor) + arm.phase - idx * 0.5) * (isRight ? 0.35 : 0.72);
           });
+        });
+      } else if (a.type === 'frog') {
+        const cycle = t * 5.8 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = -0.55 + Math.abs(Math.sin(cycle)) * 1.15;
+        a.bodyGroup.rotation.z = isRight ? Math.floor(cycle / Math.PI) * Math.PI * 2 + (cycle % Math.PI) * 2 : t * 6.5 * derpFactor;
+        if (!isRight) a.bodyGroup.rotation.x = t * 4.2 * derpFactor;
+        a.hindLegs.forEach((l) => {
+          l.legPivot.rotation.z = Math.sin(cycle * 2 + l.phase) * 0.75;
+        });
+      } else if (a.type === 'flamingo') {
+        const cycle = t * 5.5 * (isRight ? 1.0 : chaos * 0.9);
+        a.bodyGroup.position.y = 0.15 + Math.sin(cycle * 2) * 0.08;
+        a.bodyGroup.rotation.z = isRight ? Math.sin(cycle) * 0.04 : Math.sin(cycle) * 0.55 * derpFactor;
+        a.bodyGroup.rotation.x = isRight ? 0 : Math.cos(cycle * 1.3) * 0.42 * derpFactor;
+        a.neckPivot.rotation.z = Math.sin(cycle) * (isRight ? 0.08 : 0.45 * derpFactor);
+        a.legs.forEach((l) => {
+          if (l.idx === 0) {
+            l.legPivot.rotation.z = isRight ? 0.65 : Math.sin(cycle * 2) * 0.95;
+          } else {
+            l.legPivot.rotation.z = isRight ? Math.sin(cycle) * 0.05 : Math.cos(cycle * 2) * 0.85;
+          }
+        });
+      } else if (a.type === 'doge') {
+        const cycle = t * 12.0 * (isRight ? 1.0 : chaos * 0.9);
+        a.bodyGroup.position.y = Math.abs(Math.sin(cycle)) * 0.18 - 0.15;
+        a.bodyGroup.rotation.z = isRight ? Math.sin(cycle * 0.5) * 0.08 : Math.sin(cycle) * 0.35;
+        if (!isRight) a.bodyGroup.rotation.y = Math.sin(t * 5) * 0.45;
+        a.headGroup.rotation.x = Math.sin(cycle * 0.5) * 0.18;
+        a.legs.forEach((l) => {
+          l.legPivot.rotation.z = Math.sin(cycle + l.phase) * 0.65;
+        });
+      } else if (a.type === 'shark') {
+        const cycle = t * 7.0 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.sin(cycle * 0.7) * 0.25 - 0.1;
+        a.bodyGroup.rotation.y = Math.sin(cycle) * (isRight ? 0.22 : 0.55);
+        if (!isRight) a.bodyGroup.rotation.z = Math.sin(t * 6 * derpFactor) * 0.48;
+        a.tailPivot.rotation.y = Math.sin(cycle * 1.5) * 0.65;
+      } else if (a.type === 'kangaroo') {
+        const cycle = t * 7.2 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = -0.35 + Math.abs(Math.sin(cycle)) * 0.85;
+        a.bodyGroup.rotation.z = isRight ? Math.sin(cycle) * 0.12 : Math.sin(cycle) * 0.48 * derpFactor;
+        a.gloves.forEach((g) => {
+          g.armPivot.position.x = 0.35 + Math.abs(Math.sin(t * 11 + g.phase)) * 0.45;
+          g.armPivot.rotation.z = Math.sin(t * 11 + g.phase) * (isRight ? 0.35 : 0.95);
+        });
+      } else if (a.type === 'elephant') {
+        const cycle = t * 6.0 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.abs(Math.sin(cycle)) * 0.16 - 0.1;
+        a.bodyGroup.rotation.z = Math.sin(cycle) * (isRight ? 0.08 : 0.25 * derpFactor);
+        a.trunkPivot.rotation.x = isRight ? Math.sin(cycle) * 0.25 : t * 12.0 * derpFactor;
+        a.trunkPivot.rotation.z = Math.sin(cycle * 1.5) * (isRight ? 0.35 : 0.85);
+        a.ears.forEach((e) => {
+          e.earPivot.rotation.y = e.side * (0.35 + Math.abs(Math.sin(cycle * 1.5)) * 0.45);
+        });
+        a.legs.forEach((l) => {
+          l.legPivot.rotation.z = Math.sin(cycle + l.phase) * 0.48;
+        });
+      } else if (a.type === 'turtle') {
+        const cycle = t * 8.5 * (isRight ? 1.0 : chaos * 0.9);
+        if (isRight) {
+          a.bodyGroup.position.y = -0.55 + Math.sin(cycle * 2) * 0.08;
+          a.bodyGroup.rotation.y = Math.sin(cycle * 0.5) * 0.22;
+        } else {
+          // Upside-down Beyblade spin on left!
+          a.bodyGroup.position.y = -0.45 + Math.abs(Math.sin(cycle)) * 0.3;
+          a.bodyGroup.rotation.z = Math.PI + Math.sin(cycle) * 0.25;
+          a.bodyGroup.rotation.y = t * 9.5 * derpFactor;
+        }
+        a.flames.forEach((fl, idx) => {
+          const s = 0.8 + Math.abs(Math.sin(t * 22 + idx)) * 0.65;
+          fl.scale.set(1, s, 1);
+        });
+      } else if (a.type === 'gorilla') {
+        const cycle = t * 8.0 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = -0.2 + Math.abs(Math.sin(cycle)) * 0.28;
+        a.bodyGroup.rotation.z = Math.sin(cycle) * (isRight ? 0.1 : 0.38 * derpFactor);
+        a.arms.forEach((arm) => {
+          arm.armPivot.rotation.y = Math.sin(t * 14 + arm.phase) * 0.55;
+          arm.armPivot.rotation.z = Math.cos(t * 14 + arm.phase) * (isRight ? 0.45 : 0.95);
+        });
+      } else if (a.type === 'bee') {
+        const cycle = t * 9.0 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.sin(cycle * 0.8) * (isRight ? 0.22 : 0.65);
+        a.bodyGroup.rotation.z = isRight ? -0.08 + Math.sin(cycle) * 0.06 : t * 4.5 * derpFactor;
+        a.wings.forEach((w) => {
+          w.wingPivot.rotation.x = w.side * Math.sin(t * 38) * 0.75;
+        });
+      } else if (a.type === 'unicorn') {
+        const cycle = t * 7.2 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.sin(cycle * 2) * 0.24;
+        a.bodyGroup.rotation.z = Math.cos(cycle) * (isRight ? 0.16 : 0.38 * derpFactor);
+        a.neckGroup.rotation.z = Math.sin(cycle) * (isRight ? 0.1 : 0.35 * derpFactor);
+        a.legs.forEach((l) => {
+          l.legPivot.rotation.z = Math.sin(cycle + l.phase) * 0.78;
+        });
+      } else if (a.type === 'croc') {
+        const cycle = t * 7.0 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = -0.65 + Math.abs(Math.sin(cycle)) * 0.15;
+        a.bodyGroup.rotation.x = isRight ? Math.sin(cycle * 0.5) * 0.25 : t * 6.5 * derpFactor;
+        a.jawPivot.rotation.z = -Math.abs(Math.sin(t * 8)) * 0.42;
+      } else if (a.type === 'sloth') {
+        const cycle = t * 14.0 * (isRight ? 1.0 : chaos);
+        a.bodyGroup.position.y = -0.15 + Math.sin(cycle) * (isRight ? 0.15 : 0.35);
+        if (!isRight) {
+          a.bodyGroup.position.x = Math.sin(t * 35) * 0.12;
+          a.bodyGroup.rotation.z = Math.sin(t * 18) * 0.35;
+        }
+        a.limbs.forEach((l) => {
+          l.limbPivot.rotation.z = Math.sin(cycle + l.phase) * (isRight ? 0.65 : 1.15);
         });
       }
     }
