@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM 3D Comedy Arena — Viral Model-vs-Model Benchmark Studio (@RobinaMirbahar)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #2563eb;
+      --pink: #ec4899;
+      --amber: #f59e0b;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 20px 36px;
+      gap: 14px;
+    }
+    .top-banner {
+      width: 100%;
+      max-width: 1180px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, #111827, #334155);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.03em;
+    }
+    .brand h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .matchup-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .pill:hover, .pill.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    .toolbar {
+      width: 100%;
+      max-width: 1180px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+    .toolbar-group {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .field label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .field input, .field select {
+      padding: 8px 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      background: #f8fafc;
+      min-width: 150px;
+    }
+    .btn {
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+    }
+    .btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .btn.active-toggle {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .btn-random {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+    .btn-record {
+      background: #dc2626;
+      color: #ffffff;
+      border-color: #dc2626;
+    }
+    .btn-record:hover {
+      background: #b91c1c;
+    }
+
+    /* Viral X / Twitter Card Frame */
+    .comparison-frame {
+      width: 100%;
+      max-width: 1120px;
+      height: 520px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
+      position: relative;
+      user-select: none;
+    }
+    .frame-header {
+      height: 54px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #e5e7eb;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: #ffffff;
+      z-index: 4;
+    }
+    .frame-header-title {
+      text-align: center;
+      font-size: 21px;
+      font-weight: 500;
+      color: #1f2937;
+      letter-spacing: -0.01em;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .frame-header-title:first-child {
+      border-right: 1px solid #e5e7eb;
+    }
+    .stage-grid {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      background: #ffffff;
+    }
+    .pane {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .pane:first-child {
+      border-right: 1px solid #e5e7eb;
+    }
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      background: #ffffff;
+    }
+
+    /* Funny Roast / Meme Badges inside panes */
+    .roast-caption {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      pointer-events: none;
+      z-index: 6;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: opacity 0.2s ease;
+    }
+    .roast-left {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+    .roast-right {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+    .hidden-roast {
+      opacity: 0;
+    }
+
+    .watermark {
+      position: absolute;
+      right: 22px;
+      bottom: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #9ca3af;
+      pointer-events: none;
+      z-index: 6;
+    }
+    .fake-video-timer {
+      position: absolute;
+      left: 20px;
+      bottom: 16px;
+      background: rgba(17, 24, 39, 0.82);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 7px;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .footer-bar {
+      width: 100%;
+      max-width: 1180px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .tweet-preview {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tweet-preview code {
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header + 1-Click Viral Matchup Presets -->
+  <div class="top-banner">
+    <div class="brand">
+      <span class="brand-badge">🔥 VIRAL X / LINKEDIN STUDIO</span>
+      <h1>3D LLM Comedy Benchmark Arena</h1>
+    </div>
+    <div class="matchup-pills" id="matchupPills">
+      <button class="pill active" data-left="Opus 5.5" data-right="Gemini 4 Carbon">Opus 5.5 vs Gemini 4 Carbon</button>
+      <button class="pill" data-left="Claude 4.6 Opus" data-right="Gemini 4 Argon">Claude 4.6 Opus vs Gemini 4 Argon</button>
+      <button class="pill" data-left="GPT-5.5 Turbo" data-right="Gemma 4 31B-IT">GPT-5.5 vs Gemma 4 31B</button>
+      <button class="pill" data-left="DeepSeek R2" data-right="Gemini 3.8 Flash">DeepSeek R2 vs Gemini 3.8 Flash</button>
+      <button class="pill" data-left="My Code at 3 AM 💀" data-right="What I Promised the Client ✨">3 AM Code vs Client Pitch</button>
+      <button class="pill" data-left="Junior Dev Prompt" data-right="Principal Architect (@RobinaMirbahar)">Junior vs Principal Architect</button>
+    </div>
+  </div>
+
+  <!-- Studio Controls -->
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <div class="field">
+        <label>🦓 Animal / Comedy Benchmark (8 Scenes)</label>
+        <select id="sceneSelect">
+          <option value="giraffe">🦒 1. Galloping Giraffe (Spaghetti Knees vs Majestic)</option>
+          <option value="trex">🦖 2. T-Rex Trying to Sprint (Tiny Arms Panic vs Apex Predator)</option>
+          <option value="cat">🐈 3. Orange Cat 3 AM Zoomies (Glitched Loaf vs Parkour Master)</option>
+          <option value="duck">🦆 4. Duck Late for Standup (360° Head Spin vs Speed Waddle)</option>
+          <option value="crab">🦀 5. Crab Rave Party (Confused Triangle vs Synchronized Rave)</option>
+          <option value="penguin">🐧 6. Penguin Belly Toboggan (Tumbling Bowling Pin vs Pro Glider)</option>
+          <option value="dragon">🐉 7. Cyber Mech Dragon (Flying Toaster vs Fire-Breathing Boss)</option>
+          <option value="octo">🐙 8. Octopus Coding at 400 WPM (Tangled Noodles vs 10x Engineer)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Left Model (Derpy / Blocky)</label>
+        <input id="leftLabelInput" list="modelSuggestions" type="text" value="Opus 5.5" />
+      </div>
+
+      <div class="field">
+        <label>Right Model (Locked-In Pro)</label>
+        <input id="rightLabelInput" list="modelSuggestions" type="text" value="Gemini 4 Carbon" />
+      </div>
+
+      <datalist id="modelSuggestions">
+        <option value="Opus 5.5"></option>
+        <option value="Gemini 4 Carbon"></option>
+        <option value="Gemini 4 Argon"></option>
+        <option value="Gemma 4 31B-IT"></option>
+        <option value="Gemma 4 Multi-LoRA"></option>
+        <option value="Claude 4.6 Opus"></option>
+        <option value="Claude 4.5 Sonnet"></option>
+        <option value="GPT-5.5 Turbo"></option>
+        <option value="o4-mini-high"></option>
+        <option value="DeepSeek R2"></option>
+        <option value="Llama 4 405B"></option>
+        <option value="Grok 4 Unhinged"></option>
+      </datalist>
+
+      <div class="field">
+        <label>⚡ Chaos / Speed</label>
+        <select id="chaosSelect" style="min-width: 125px;">
+          <option value="1">1x Normal</option>
+          <option value="1.65" selected>1.6x Funny</option>
+          <option value="2.6">2.6x Derp Turbo</option>
+          <option value="4.2">4.2x MAX BRAINROT 💀</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Watermark</label>
+        <input id="watermarkInput" type="text" value="@RobinaMirbahar" style="min-width: 135px;" />
+      </div>
+    </div>
+
+    <div class="toolbar-group">
+      <button class="btn active-toggle" id="roastToggleBtn">💬 Roast Captions: ON</button>
+      <button class="btn active-toggle" id="googlyToggleBtn">👀 Googly Derp Eyes: ON</button>
+      <button class="btn" id="resetCamBtn" title="Reset 3D Camera Zoom & Angle">🔄 Fit / Reset View</button>
+      <button class="btn btn-random" id="randomBtn">🎲 Randomize</button>
+      <button class="btn btn-record" id="recordBtn">⏺ Record 8s Video</button>
+    </div>
+  </div>
+
+  <!-- Viral Split-Screen Comparison Card -->
+  <div class="comparison-frame" id="captureFrame">
+    <div class="frame-header">
+      <div class="frame-header-title" id="leftTitleDisplay">Opus 5.5</div>
+      <div class="frame-header-title" id="rightTitleDisplay">Gemini 4 Carbon</div>
+    </div>
+    <div class="stage-grid">
+      <div class="pane" id="leftPane">
+        <div class="roast-caption roast-left" id="leftRoastBadge">bro forgot how knees work 💀</div>
+      </div>
+      <div class="pane" id="rightPane">
+        <div class="roast-caption roast-right" id="rightRoastBadge">locked in 1000x aura ✨</div>
+      </div>
+      <div class="fake-video-timer" id="timerBadge">0:00</div>
+      <div class="watermark" id="watermarkDisplay">@RobinaMirbahar</div>
+    </div>
+  </div>
+
+  <!-- Copyable Viral Post Caption Footer -->
+  <div class="footer-bar">
+    <div class="tweet-preview">
+      <span>📋 <strong>Ready-to-Post X / LinkedIn Caption:</strong></span>
+      <code id="tweetTextDisplay">opus 5.5 vs gemini 4 carbon 🦒💀</code>
+      <button class="btn" id="copyTweetBtn" style="height: 30px; padding: 4px 10px; font-size: 12px;">Copy Caption</button>
+    </div>
+    <span>💡 Drag stage to rotate • Scroll wheel to zoom in/out</span>
+  </div>
+
+  <script>
+    const SCENE_ROASTS = {
+      giraffe: {
+        left: 'bro forgot how giraffe knees work 💀',
+        right: 'majestic National Geographic documentary ✨',
+        emoji: '🦒',
+        dist: 10.8,
+        lookX: 0.15,
+        lookY: 0.35
+      },
+      trex: {
+        left: 'tiny arms panic attack (0% balance) 😭',
+        right: 'Jurassic Park apex predator locked in 🦖🔥',
+        emoji: '🦖',
+        dist: 8.4,
+        lookX: 0.05,
+        lookY: -0.25
+      },
+      cat: {
+        left: '4-polygon loaf vibrating at 3 AM 🍞💀',
+        right: 'aerodynamic parkour zoomies champion 🐈⚡',
+        emoji: '🐈',
+        dist: 7.8,
+        lookX: 0.05,
+        lookY: -0.35
+      },
+      duck: {
+        left: 'head spinning 360° before daily standup 😵‍💫',
+        right: 'CEO waddling into production deploy 🦆💼',
+        emoji: '🦆',
+        dist: 7.8,
+        lookX: 0.1,
+        lookY: -0.2
+      },
+      crab: {
+        left: 'boiled triangle having an existential crisis 🔺',
+        right: '120 BPM Crab Rave mainstage headliner 🦀🎶',
+        emoji: '🦀',
+        dist: 7.8,
+        lookX: 0.0,
+        lookY: -0.45
+      },
+      penguin: {
+        left: 'bowling pin tumbling down the stairs 🎳💀',
+        right: 'Olympic gold medal belly-slide physics 🐧❄️',
+        emoji: '🐧',
+        dist: 7.8,
+        lookX: 0.05,
+        lookY: -0.55
+      },
+      dragon: {
+        left: 'flying toaster coughing Minecraft smoke cubes 🍞',
+        right: '18-joint procedural shenron breathing fire 🐉🔥',
+        emoji: '🐉',
+        dist: 8.6,
+        lookX: 0.0,
+        lookY: -0.25
+      },
+      octo: {
+        left: 'tangled wet spaghetti mashing StackOverflow 🍝',
+        right: '8 inverse-kinematic tentacles shipping prod 🐙💻',
+        emoji: '🐙',
+        dist: 8.2,
+        lookX: 0.0,
+        lookY: -0.35
+      }
+    };
+
+    const leftPane = document.getElementById('leftPane');
+    const rightPane = document.getElementById('rightPane');
+    const leftLabelInput = document.getElementById('leftLabelInput');
+    const rightLabelInput = document.getElementById('rightLabelInput');
+    const watermarkInput = document.getElementById('watermarkInput');
+    const leftTitleDisplay = document.getElementById('leftTitleDisplay');
+    const rightTitleDisplay = document.getElementById('rightTitleDisplay');
+    const watermarkDisplay = document.getElementById('watermarkDisplay');
+    const sceneSelect = document.getElementById('sceneSelect');
+    const chaosSelect = document.getElementById('chaosSelect');
+    const leftRoastBadge = document.getElementById('leftRoastBadge');
+    const rightRoastBadge = document.getElementById('rightRoastBadge');
+    const tweetTextDisplay = document.getElementById('tweetTextDisplay');
+
+    let showRoasts = true;
+    let showGooglyEyes = true;
+
+    function updateLabelsAndTweet() {
+      const l = leftLabelInput.value || 'Model A';
+      const r = rightLabelInput.value || 'Model B';
+      leftTitleDisplay.textContent = l;
+      rightTitleDisplay.textContent = r;
+      watermarkDisplay.textContent = watermarkInput.value || '@RobinaMirbahar';
+
+      const sceneKey = sceneSelect.value;
+      const meta = SCENE_ROASTS[sceneKey] || SCENE_ROASTS.giraffe;
+      leftRoastBadge.textContent = meta.left;
+      rightRoastBadge.textContent = meta.right;
+      tweetTextDisplay.textContent = `${l.toLowerCase()} vs ${r.toLowerCase()} ${meta.emoji}💀`;
+    }
+
+    leftLabelInput.addEventListener('input', updateLabelsAndTweet);
+    rightLabelInput.addEventListener('input', updateLabelsAndTweet);
+    watermarkInput.addEventListener('input', updateLabelsAndTweet);
+
+    document.querySelectorAll('#matchupPills .pill').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#matchupPills .pill').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        leftLabelInput.value = btn.getAttribute('data-left');
+        rightLabelInput.value = btn.getAttribute('data-right');
+        updateLabelsAndTweet();
+      });
+    });
+
+    const roastToggleBtn = document.getElementById('roastToggleBtn');
+    roastToggleBtn.addEventListener('click', () => {
+      showRoasts = !showRoasts;
+      roastToggleBtn.textContent = `💬 Roast Captions: ${showRoasts ? 'ON' : 'OFF'}`;
+      roastToggleBtn.classList.toggle('active-toggle', showRoasts);
+      leftRoastBadge.classList.toggle('hidden-roast', !showRoasts);
+      rightRoastBadge.classList.toggle('hidden-roast', !showRoasts);
+    });
+
+    const googlyToggleBtn = document.getElementById('googlyToggleBtn');
+    googlyToggleBtn.addEventListener('click', () => {
+      showGooglyEyes = !showGooglyEyes;
+      googlyToggleBtn.textContent = `👀 Googly Derp Eyes: ${showGooglyEyes ? 'ON' : 'OFF'}`;
+      googlyToggleBtn.classList.toggle('active-toggle', showGooglyEyes);
+      loadPreset(sceneSelect.value);
+    });
+
+    document.getElementById('copyTweetBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(tweetTextDisplay.textContent);
+      const btn = document.getElementById('copyTweetBtn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = 'Copy Caption'; }, 1500);
+    });
+
+    function createGiraffeTexture(isHighDetail) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 512;
+      const ctx = canvas.getContext('2d');
+
+      if (!isHighDetail) {
+        ctx.fillStyle = '#f3d299';
+        ctx.fillRect(0, 0, 512, 512);
+        const colors = ['#9a4b1a', '#b86528', '#7c3710', '#d18845'];
+        for (let y = 0; y < 512; y += 44) {
+          for (let x = 0; x < 512; x += 44) {
+            ctx.fillStyle = colors[(x + y) % colors.length];
+            ctx.beginPath();
+            ctx.moveTo(x + 4, y + 4);
+            ctx.lineTo(x + 38, y + 8);
+            ctx.lineTo(x + 32, y + 38);
+            ctx.lineTo(x + 8, y + 34);
+            ctx.closePath();
+            ctx.fill();
+          }
+        }
+      } else {
+        ctx.fillStyle = '#f5cfa0';
+        ctx.fillRect(0, 0, 512, 512);
+        for (let i = 0; i < 65; i++) {
+          const x = (Math.sin(i * 78.233) * 0.5 + 0.5) * 512;
+          const y = (Math.cos(i * 45.164) * 0.5 + 0.5) * 512;
+          const r = 22 + (i % 14);
+          ctx.fillStyle = i % 3 === 0 ? '#7a2e0e' : (i % 2 === 0 ? '#9c4116' : '#b3521e');
+          ctx.beginPath();
+          const sides = 7;
+          for (let s = 0; s < sides; s++) {
+            const ang = (s / sides) * Math.PI * 2;
+            const rad = r * (0.78 + 0.25 * Math.sin(s * 2.3 + x));
+            const px = x + Math.cos(ang) * rad;
+            const py = y + Math.sin(ang) * rad;
+            if (s === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          }
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      return tex;
+    }
+
+    function addEyesToHead(headParent, isRight, xPos, yPos, zSpread, scale = 1.0) {
+      const whiteMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const pupilMat = new THREE.MeshBasicMaterial({ color: 0x111827 });
+      const pupils = [];
+
+      [-1, 1].forEach((side, idx) => {
+        const eyeRadius = ((!isRight && showGooglyEyes) ? 0.13 : 0.065) * scale;
+        const eyeBall = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius, 12, 12), whiteMat);
+        eyeBall.position.set(xPos, yPos, side * zSpread);
+        headParent.add(eyeBall);
+
+        const pupilRadius = eyeRadius * 0.55;
+        const pupil = new THREE.Mesh(new THREE.SphereGeometry(pupilRadius, 10, 10), pupilMat);
+        pupil.position.set(eyeRadius * 0.7, (!isRight && showGooglyEyes) ? (idx === 0 ? 0.04 : -0.04) : 0, 0);
+        eyeBall.add(pupil);
+        pupils.push(pupil);
+      });
+      return pupils;
+    }
+
+    function addDustTrail(stage, count = 14, colorHex = 0xe7d6be) {
+      const dustParticles = [];
+      const dustMat = new THREE.MeshStandardMaterial({
+        color: colorHex,
+        roughness: 0.9,
+        transparent: true,
+        opacity: 0.75
+      });
+      for (let i = 0; i < count; i++) {
+        const p = new THREE.Mesh(new THREE.SphereGeometry(0.06 + (i % 3) * 0.035, 8, 8), dustMat);
+        p.position.set(-1.0 - Math.random() * 1.8, -1.9 + Math.random() * 0.25, (Math.random() - 0.5) * 1.1);
+        stage.rootGroup.add(p);
+        dustParticles.push({ mesh: p, offset: i * 0.41 });
+      }
+      return dustParticles;
+    }
+
+    function createStage(container, isRightModel) {
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+
+      const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+      renderer.setClearColor(0xffffff, 1);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      const hemi = new THREE.HemisphereLight(0xffffff, 0xf3e8d2, 0.9);
+      scene.add(hemi);
+
+      const dirLight = new THREE.DirectionalLight(0xfffbeb, 0.92);
+      dirLight.position.set(4, 9, 5);
+      dirLight.castShadow = true;
+      dirLight.shadow.mapSize.width = 1024;
+      dirLight.shadow.mapSize.height = 1024;
+      dirLight.shadow.camera.near = 1;
+      dirLight.shadow.camera.far = 25;
+      const d = 5.5;
+      dirLight.shadow.camera.left = -d;
+      dirLight.shadow.camera.right = d;
+      dirLight.shadow.camera.top = d;
+      dirLight.shadow.camera.bottom = -d;
+      scene.add(dirLight);
+
+      const floorGeo = new THREE.PlaneGeometry(30, 30);
+      const floorMat = new THREE.ShadowMaterial({ opacity: 0.15 });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -2.0;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      const rootGroup = new THREE.Group();
+      scene.add(rootGroup);
+
+      return { scene, camera, renderer, rootGroup, container, isRightModel, actors: {} };
+    }
+
+    const leftStage = createStage(leftPane, false);
+    const rightStage = createStage(rightPane, true);
+
+    function clearStage(stage) {
+      while (stage.rootGroup.children.length) {
+        stage.rootGroup.remove(stage.rootGroup.children[0]);
+      }
+    }
+
+    // 1. GALLOPING GIRAFFE
+    function buildGiraffeScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const tex = createGiraffeTexture(isRight);
+      const mat = new THREE.MeshStandardMaterial({
+        map: tex,
+        roughness: isRight ? 0.55 : 0.78,
+        flatShading: !isRight
+      });
+      const darkMat = new THREE.MeshStandardMaterial({ color: 0x2b1810, roughness: 0.7 });
+      const maneMat = new THREE.MeshStandardMaterial({ color: 0x5c260e, roughness: 0.8 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torsoGeo = isRight
+        ? new THREE.CylinderGeometry(0.52, 0.64, 2.05, 16)
+        : new THREE.BoxGeometry(2.1, 1.05, 0.95);
+      const torso = new THREE.Mesh(torsoGeo, mat);
+      torso.rotation.z = isRight ? (Math.PI / 2 - 0.16) : 0.1;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const neckPivot = new THREE.Group();
+      neckPivot.position.set(0.85, 0.35, 0);
+      bodyGroup.add(neckPivot);
+
+      const neck = new THREE.Mesh(
+        isRight ? new THREE.CylinderGeometry(0.19, 0.38, 2.55, 14) : new THREE.CylinderGeometry(0.24, 0.42, 2.4, 5),
+        mat
+      );
+      neck.position.set(0.55, 1.05, 0);
+      neck.rotation.z = -0.46;
+      neck.castShadow = true;
+      neckPivot.add(neck);
+
+      if (isRight) {
+        for (let i = 0; i < 9; i++) {
+          const fin = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.18, 0.06), maneMat);
+          fin.position.set(0.05 + i * 0.11, 0.25 + i * 0.22, 0);
+          fin.rotation.z = -0.46;
+          neckPivot.add(fin);
+        }
+      }
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(1.12, 2.15, 0);
+      neckPivot.add(headGroup);
+
+      const headMesh = new THREE.Mesh(
+        isRight ? new THREE.ConeGeometry(0.24, 0.68, 12) : new THREE.BoxGeometry(0.62, 0.34, 0.34),
+        mat
+      );
+      headMesh.rotation.z = isRight ? (-Math.PI / 2 - 0.25) : -0.2;
+      headMesh.position.set(0.18, 0, 0);
+      headMesh.castShadow = true;
+      headGroup.add(headMesh);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.15, 0.06, 0.17, 1.0);
+
+      [-0.08, 0.08].forEach((zOff) => {
+        const horn = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.22, 8), darkMat);
+        horn.position.set(-0.02, 0.22, zOff);
+        headGroup.add(horn);
+      });
+
+      const legs = [];
+      [
+        { x: 0.78, z: 0.32, phase: 0.0, isFront: true },
+        { x: 0.78, z: -0.32, phase: 0.55, isFront: true },
+        { x: -0.78, z: 0.32, phase: Math.PI, isFront: false },
+        { x: -0.78, z: -0.32, phase: Math.PI + 0.55, isFront: false }
+      ].forEach((cfg) => {
+        const hip = new THREE.Group();
+        hip.position.set(cfg.x, -0.32, cfg.z);
+        bodyGroup.add(hip);
+
+        const upper = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.1, 0.95, isRight ? 12 : 5), mat);
+        upper.position.y = -0.45;
+        upper.castShadow = true;
+        hip.add(upper);
+
+        const knee = new THREE.Group();
+        knee.position.y = -0.9;
+        hip.add(knee);
+
+        const lower = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.065, 0.92, isRight ? 12 : 5), mat);
+        lower.position.y = -0.44;
+        lower.castShadow = true;
+        knee.add(lower);
+
+        const hoof = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.1, 0.12, 8), darkMat);
+        hoof.position.y = -0.9;
+        knee.add(hoof);
+
+        legs.push({ hip, knee, phase: cfg.phase, isFront: cfg.isFront });
+      });
+
+      const tailPivot = new THREE.Group();
+      tailPivot.position.set(-1.02, 0.1, 0);
+      bodyGroup.add(tailPivot);
+      const tailRod = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.02, 0.85, 6), mat);
+      tailRod.position.set(-0.22, -0.36, 0);
+      tailRod.rotation.z = -0.45;
+      tailPivot.add(tailRod);
+
+      const dustParticles = addDustTrail(stage, 14, 0xe7d6be);
+      stage.actors = { type: 'giraffe', bodyGroup, neckPivot, legs, tailPivot, dustParticles, pupils };
+    }
+
+    // 2. T-REX TRYING TO SPRINT
+    function buildTrexScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const skinMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x15803d : 0x84cc16,
+        roughness: isRight ? 0.5 : 0.85,
+        flatShading: !isRight
+      });
+      const bellyMat = new THREE.MeshStandardMaterial({ color: 0xfef08a, roughness: 0.7, flatShading: !isRight });
+      const toothMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.85, 16, 14) : new THREE.BoxGeometry(1.6, 1.1, 0.95),
+        skinMat
+      );
+      torso.scale.set(1.35, 0.95, 0.85);
+      torso.rotation.z = 0.25;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      // Giant Jaw / Head
+      const headGroup = new THREE.Group();
+      headGroup.position.set(1.15, 0.85, 0);
+      bodyGroup.add(headGroup);
+
+      const skull = new THREE.Mesh(
+        isRight ? new THREE.BoxGeometry(1.05, 0.62, 0.62) : new THREE.BoxGeometry(0.95, 0.55, 0.55),
+        skinMat
+      );
+      skull.castShadow = true;
+      headGroup.add(skull);
+
+      const jawPivot = new THREE.Group();
+      jawPivot.position.set(-0.2, -0.25, 0);
+      headGroup.add(jawPivot);
+      const lowerJaw = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.2, 0.52), bellyMat);
+      lowerJaw.position.set(0.25, -0.05, 0);
+      jawPivot.add(lowerJaw);
+
+      if (isRight) {
+        for (let t = 0; t < 5; t++) {
+          const tooth = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.14, 6), toothMat);
+          tooth.position.set(0.1 + t * 0.14, -0.34, 0.22);
+          tooth.rotation.x = Math.PI;
+          headGroup.add(tooth);
+        }
+      }
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.2, 0.18, 0.32, 1.25);
+
+      // Hilariously Tiny Arms
+      const arms = [];
+      [-0.45, 0.45].forEach((zOff, i) => {
+        const armPivot = new THREE.Group();
+        armPivot.position.set(0.82, 0.1, zOff);
+        bodyGroup.add(armPivot);
+        const tinyArm = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.035, 0.42, 6), skinMat);
+        tinyArm.position.set(0.18, -0.1, 0);
+        tinyArm.rotation.z = 1.1;
+        armPivot.add(tinyArm);
+        arms.push({ armPivot, phase: i * Math.PI });
+      });
+
+      // Heavy Stomping Legs
+      const legs = [];
+      [-0.48, 0.48].forEach((zOff, i) => {
+        const hip = new THREE.Group();
+        hip.position.set(-0.15, -0.35, zOff);
+        bodyGroup.add(hip);
+        const thigh = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.16, 0.95, isRight ? 12 : 5), skinMat);
+        thigh.position.y = -0.4;
+        thigh.castShadow = true;
+        hip.add(thigh);
+
+        const ankle = new THREE.Group();
+        ankle.position.y = -0.85;
+        hip.add(ankle);
+        const shin = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.1, 0.78, isRight ? 12 : 5), skinMat);
+        shin.position.y = -0.35;
+        shin.castShadow = true;
+        ankle.add(shin);
+
+        const foot = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.16, 0.34), skinMat);
+        foot.position.set(0.15, -0.72, 0);
+        ankle.add(foot);
+
+        legs.push({ hip, ankle, phase: i * Math.PI });
+      });
+
+      // Tail
+      const tailGroup = new THREE.Group();
+      tailGroup.position.set(-1.05, 0.05, 0);
+      bodyGroup.add(tailGroup);
+      const tailMesh = new THREE.Mesh(new THREE.ConeGeometry(0.38, 1.9, isRight ? 12 : 5), skinMat);
+      tailMesh.rotation.z = Math.PI / 2 + 0.15;
+      tailMesh.position.x = -0.85;
+      tailMesh.castShadow = true;
+      tailGroup.add(tailMesh);
+
+      const dustParticles = addDustTrail(stage, 16, 0xd6d3d1);
+      stage.actors = { type: 'trex', bodyGroup, headGroup, jawPivot, arms, legs, tailGroup, dustParticles, pupils };
+    }
+
+    // 3. ORANGE CAT 3 AM ZOOMIES
+    function buildCatScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const furMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xf97316 : 0xfb923c,
+        roughness: 0.6,
+        flatShading: !isRight
+      });
+      const whiteMat = new THREE.MeshStandardMaterial({ color: 0xfff7ed });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.CylinderGeometry(0.38, 0.42, 1.85, 14) : new THREE.BoxGeometry(1.75, 0.78, 0.82),
+        furMat
+      );
+      if (isRight) torso.rotation.z = Math.PI / 2;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(1.05, 0.38, 0);
+      bodyGroup.add(headGroup);
+
+      const head = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.42, 16, 16) : new THREE.BoxGeometry(0.68, 0.62, 0.68),
+        furMat
+      );
+      head.castShadow = true;
+      headGroup.add(head);
+
+      // Ears
+      [-0.22, 0.22].forEach((zOff) => {
+        const ear = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.32, 4), furMat);
+        ear.position.set(0, 0.42, zOff);
+        headGroup.add(ear);
+      });
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.35, 0.08, 0.18, 1.15);
+
+      const legs = [];
+      [
+        { x: 0.68, z: 0.26, phase: 0 },
+        { x: 0.68, z: -0.26, phase: 0.4 },
+        { x: -0.68, z: 0.26, phase: Math.PI },
+        { x: -0.68, z: -0.26, phase: Math.PI + 0.4 }
+      ].forEach((cfg) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(cfg.x, -0.25, cfg.z);
+        bodyGroup.add(legPivot);
+        const limb = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.08, 0.95, isRight ? 10 : 4), furMat);
+        limb.position.y = -0.45;
+        limb.castShadow = true;
+        legPivot.add(limb);
+        const paw = new THREE.Mesh(new THREE.SphereGeometry(0.11, 8, 8), whiteMat);
+        paw.position.y = -0.92;
+        legPivot.add(paw);
+        legs.push({ legPivot, phase: cfg.phase });
+      });
+
+      const tailPivot = new THREE.Group();
+      tailPivot.position.set(-0.92, 0.25, 0);
+      bodyGroup.add(tailPivot);
+      const tail = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.04, 1.25, 8), furMat);
+      tail.position.set(-0.35, 0.48, 0);
+      tail.rotation.z = 0.55;
+      tailPivot.add(tail);
+
+      const dustParticles = addDustTrail(stage, 16, 0xfed7aa);
+      stage.actors = { type: 'cat', bodyGroup, headGroup, legs, tailPivot, dustParticles, pupils };
+    }
+
+    // 4. WADDLING DUCK LATE FOR STANDUP
+    function buildDuckScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const bodyMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xfacc15 : 0xfde047,
+        roughness: 0.45,
+        flatShading: !isRight
+      });
+      const beakMat = new THREE.MeshStandardMaterial({ color: 0xea580c, roughness: 0.5 });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const body = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.75, 18, 16) : new THREE.BoxGeometry(1.3, 0.95, 0.95),
+        bodyMat
+      );
+      body.scale.set(1.25, 0.88, 0.92);
+      body.castShadow = true;
+      bodyGroup.add(body);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0.65, 0.78, 0);
+      bodyGroup.add(headGroup);
+
+      const head = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.42, 16, 16) : new THREE.BoxGeometry(0.62, 0.62, 0.62),
+        bodyMat
+      );
+      head.castShadow = true;
+      headGroup.add(head);
+
+      const beak = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.16, 0.34), beakMat);
+      beak.position.set(0.42, -0.04, 0);
+      headGroup.add(beak);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.28, 0.12, 0.24, 1.15);
+
+      const wings = [];
+      [-0.72, 0.72].forEach((zOff, i) => {
+        const wingPivot = new THREE.Group();
+        wingPivot.position.set(0, 0.1, zOff);
+        bodyGroup.add(wingPivot);
+        const wing = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.42, 0.12), bodyMat);
+        wingPivot.add(wing);
+        wings.push({ wingPivot, side: i === 0 ? -1 : 1 });
+      });
+
+      const feet = [];
+      [-0.32, 0.32].forEach((zOff, i) => {
+        const legPivot = new THREE.Group();
+        legPivot.position.set(0, -0.55, zOff);
+        bodyGroup.add(legPivot);
+        const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.65, 8), beakMat);
+        leg.position.y = -0.3;
+        legPivot.add(leg);
+        const flipper = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.08, 0.38), beakMat);
+        flipper.position.set(0.12, -0.62, 0);
+        legPivot.add(flipper);
+        feet.push({ legPivot, phase: i * Math.PI });
+      });
+
+      const dustParticles = addDustTrail(stage, 12, 0xfef08a);
+      stage.actors = { type: 'duck', bodyGroup, headGroup, wings, feet, dustParticles, pupils };
+    }
+
+    // 5. CRAB RAVE PARTY
+    function buildCrabScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const shellMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0xef4444 : 0xf87171,
+        roughness: 0.38,
+        flatShading: !isRight
+      });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const carapace = new THREE.Mesh(
+        isRight ? new THREE.SphereGeometry(0.85, 18, 14) : new THREE.ConeGeometry(1.05, 0.9, 4),
+        shellMat
+      );
+      if (isRight) carapace.scale.set(1.15, 0.58, 1.35);
+      carapace.castShadow = true;
+      bodyGroup.add(carapace);
+
+      const pupils = addEyesToHead(bodyGroup, isRight, 0.55, 0.52, 0.35, 1.25);
+
+      const claws = [];
+      [-0.85, 0.85].forEach((zOff, i) => {
+        const clawPivot = new THREE.Group();
+        clawPivot.position.set(0.55, 0.15, zOff);
+        bodyGroup.add(clawPivot);
+        const pincer = new THREE.Mesh(new THREE.SphereGeometry(0.36, isRight ? 12 : 5, 10), shellMat);
+        pincer.scale.set(1.4, 0.8, 0.7);
+        pincer.position.set(0.35, 0.35, 0);
+        pincer.castShadow = true;
+        clawPivot.add(pincer);
+        claws.push({ clawPivot, phase: i * Math.PI });
+      });
+
+      const legs = [];
+      for (let i = 0; i < 6; i++) {
+        const side = i < 3 ? 1 : -1;
+        const idx = i % 3;
+        const legPivot = new THREE.Group();
+        legPivot.position.set(-0.35 + idx * 0.38, -0.15, side * 0.85);
+        bodyGroup.add(legPivot);
+        const seg = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.04, 0.95, 6), shellMat);
+        seg.position.set(0, -0.38, side * 0.25);
+        seg.rotation.x = side * 0.45;
+        seg.castShadow = true;
+        legPivot.add(seg);
+        legs.push({ legPivot, phase: idx * 0.9 + (side > 0 ? 0 : Math.PI) });
+      }
+
+      const dustParticles = addDustTrail(stage, 14, 0xfecaca);
+      stage.actors = { type: 'crab', bodyGroup, claws, legs, dustParticles, pupils };
+    }
+
+    // 6. PENGUIN BELLY TOBOGGAN
+    function buildPenguinScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const darkMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, flatShading: !isRight });
+      const bellyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 });
+      const beakMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b });
+
+      const bodyGroup = new THREE.Group();
+      stage.rootGroup.add(bodyGroup);
+
+      const torso = new THREE.Mesh(
+        isRight ? new THREE.CylinderGeometry(0.45, 0.58, 1.85, 16) : new THREE.BoxGeometry(1.75, 0.85, 0.9),
+        darkMat
+      );
+      if (isRight) torso.rotation.z = Math.PI / 2;
+      torso.castShadow = true;
+      bodyGroup.add(torso);
+
+      const belly = new THREE.Mesh(new THREE.SphereGeometry(0.52, 14, 12), bellyMat);
+      belly.scale.set(1.6, 0.55, 0.85);
+      belly.position.set(0, -0.22, 0);
+      bodyGroup.add(belly);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0.95, 0.15, 0);
+      bodyGroup.add(headGroup);
+
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.42, isRight ? 16 : 6, 12), darkMat);
+      headGroup.add(head);
+
+      const beak = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.42, 8), beakMat);
+      beak.rotation.z = -Math.PI / 2;
+      beak.position.set(0.5, 0, 0);
+      headGroup.add(beak);
+
+      const pupils = addEyesToHead(headGroup, isRight, 0.3, 0.14, 0.22, 1.1);
+
+      const flippers = [];
+      [-0.55, 0.55].forEach((zOff, i) => {
+        const flipPivot = new THREE.Group();
+        flipPivot.position.set(0.15, 0, zOff);
+        bodyGroup.add(flipPivot);
+        const flip = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.1, 0.32), darkMat);
+        flip.position.z = i === 0 ? -0.2 : 0.2;
+        flipPivot.add(flip);
+        flippers.push({ flipPivot, side: i === 0 ? -1 : 1 });
+      });
+
+      const dustParticles = addDustTrail(stage, 18, 0xe0f2fe);
+      stage.actors = { type: 'penguin', bodyGroup, headGroup, flippers, dustParticles, pupils };
+    }
+
+    // 7. CYBER MECH DRAGON
+    function buildDragonScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const bodyMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x2563eb : 0x64748b,
+        metalness: isRight ? 0.45 : 0.1,
+        roughness: isRight ? 0.3 : 0.75,
+        flatShading: !isRight
+      });
+      const wingMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x60a5fa : 0x94a3b8,
+        side: THREE.DoubleSide,
+        flatShading: true
+      });
+
+      const segments = [];
+      const segCount = isRight ? 18 : 8;
+      for (let i = 0; i < segCount; i++) {
+        const r = 0.36 * (1 - i / (segCount * 1.25));
+        const seg = new THREE.Mesh(
+          isRight ? new THREE.SphereGeometry(r, 14, 14) : new THREE.BoxGeometry(r * 1.7, r * 1.7, r * 1.7),
+          bodyMat
+        );
+        seg.position.x = 1.4 - i * (3.0 / segCount);
+        seg.castShadow = true;
+        stage.rootGroup.add(seg);
+        segments.push(seg);
+      }
+
+      const pupils = addEyesToHead(segments[0], isRight, 0.25, 0.14, 0.22, 1.1);
+
+      const leftWing = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.05, 1.95), wingMat);
+      leftWing.position.set(0.45, 0.1, 1.0);
+      leftWing.castShadow = true;
+      stage.rootGroup.add(leftWing);
+
+      const rightWing = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.05, 1.95), wingMat);
+      rightWing.position.set(0.45, 0.1, -1.0);
+      rightWing.castShadow = true;
+      stage.rootGroup.add(rightWing);
+
+      const dustParticles = addDustTrail(stage, 14, isRight ? 0xfbbf24 : 0x9ca3af);
+      stage.actors = { type: 'dragon', segments, leftWing, rightWing, dustParticles, pupils };
+    }
+
+    // 8. OCTOPOD CODING AT 400 WPM
+    function buildOctoScene(stage) {
+      clearStage(stage);
+      const isRight = stage.isRightModel;
+      const coreMat = new THREE.MeshStandardMaterial({
+        color: isRight ? 0x7c3aed : 0xa855f7,
+        roughness: 0.35,
+        flatShading: !isRight
+      });
+      const head = new THREE.Mesh(
+        new THREE.SphereGeometry(0.72, isRight ? 20 : 6, isRight ? 20 : 6),
+        coreMat
+      );
+      head.position.y = 0.35;
+      head.castShadow = true;
+      stage.rootGroup.add(head);
+
+      const pupils = addEyesToHead(head, isRight, 0.62, 0.08, 0.28, 1.25);
+
+      const arms = [];
+      const armCount = 8;
+      for (let a = 0; a < armCount; a++) {
+        const ang = (a / armCount) * Math.PI * 2;
+        const armGroup = new THREE.Group();
+        armGroup.rotation.y = ang;
+        stage.rootGroup.add(armGroup);
+
+        const joints = [];
+        for (let j = 0; j < 5; j++) {
+          const link = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.11 - j * 0.015, 0.09 - j * 0.012, 0.46, isRight ? 10 : 4),
+            coreMat
+          );
+          link.position.set(0.45 + j * 0.32, -0.15 - j * 0.22, 0);
+          link.rotation.z = -0.6;
+          link.castShadow = true;
+          armGroup.add(link);
+          joints.push(link);
+        }
+        arms.push({ armGroup, joints, phase: a * 0.8 });
+      }
+      const dustParticles = addDustTrail(stage, 12, 0xddd6fe);
+      stage.actors = { type: 'octo', head, arms, dustParticles, pupils };
+    }
+
+    // Synchronized camera orbit & framing state
+    let camYaw = 0.22;
+    let camPitch = 0.14;
+    let camDist = 10.8;
+    let camLookX = 0.15;
+    let camLookY = 0.35;
+    let isDragging = false;
+    let prevX = 0;
+    let prevY = 0;
+
+    function loadPreset(preset) {
+      const builders = {
+        giraffe: buildGiraffeScene,
+        trex: buildTrexScene,
+        cat: buildCatScene,
+        duck: buildDuckScene,
+        crab: buildCrabScene,
+        penguin: buildPenguinScene,
+        dragon: buildDragonScene,
+        octo: buildOctoScene
+      };
+      const fn = builders[preset] || buildGiraffeScene;
+      fn(leftStage);
+      fn(rightStage);
+
+      const meta = SCENE_ROASTS[preset] || SCENE_ROASTS.giraffe;
+      camDist = meta.dist || 10.8;
+      camLookX = meta.lookX !== undefined ? meta.lookX : 0.0;
+      camLookY = meta.lookY !== undefined ? meta.lookY : 0.1;
+
+      updateLabelsAndTweet();
+    }
+
+    sceneSelect.addEventListener('change', () => loadPreset(sceneSelect.value));
+
+    document.getElementById('resetCamBtn').addEventListener('click', () => {
+      camYaw = 0.22;
+      camPitch = 0.14;
+      const meta = SCENE_ROASTS[sceneSelect.value] || SCENE_ROASTS.giraffe;
+      camDist = meta.dist || 10.8;
+      camLookX = meta.lookX !== undefined ? meta.lookX : 0.0;
+      camLookY = meta.lookY !== undefined ? meta.lookY : 0.1;
+    });
+
+    document.getElementById('randomBtn').addEventListener('click', () => {
+      const scenes = ['giraffe', 'trex', 'cat', 'duck', 'crab', 'penguin', 'dragon', 'octo'];
+      const nextScene = scenes[Math.floor(Math.random() * scenes.length)];
+      sceneSelect.value = nextScene;
+
+      const pills = Array.from(document.querySelectorAll('#matchupPills .pill'));
+      const randPill = pills[Math.floor(Math.random() * pills.length)];
+      pills.forEach((b) => b.classList.remove('active'));
+      randPill.classList.add('active');
+      leftLabelInput.value = randPill.getAttribute('data-left');
+      rightLabelInput.value = randPill.getAttribute('data-right');
+
+      loadPreset(nextScene);
+    });
+
+    const captureFrameEl = document.getElementById('captureFrame');
+    captureFrameEl.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      camYaw -= (e.clientX - prevX) * 0.007;
+      camPitch = Math.max(-0.2, Math.min(0.85, camPitch + (e.clientY - prevY) * 0.006));
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    captureFrameEl.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      camDist = Math.max(4.5, Math.min(18.0, camDist + e.deltaY * 0.006));
+    }, { passive: false });
+
+    function resizeStages() {
+      [leftStage, rightStage].forEach((st) => {
+        const w = st.container.clientWidth || 520;
+        const h = st.container.clientHeight || 456;
+        if (st.lastW !== w || st.lastH !== h) {
+          st.lastW = w;
+          st.lastH = h;
+          st.camera.aspect = w / h;
+          st.camera.updateProjectionMatrix();
+          st.renderer.setSize(w, h, false);
+        }
+      });
+    }
+    window.addEventListener('resize', resizeStages);
+
+    loadPreset('giraffe');
+    resizeStages();
+
+    function updateStageAnimation(st, t) {
+      const a = st.actors;
+      if (!a) return;
+      const chaos = parseFloat(chaosSelect.value || '1.65');
+      const isRight = st.isRightModel;
+      // Left model gets extra funny wobble/derp multiplier!
+      const derpFactor = isRight ? 1.0 : chaos;
+
+      // Animate googly pupils on left model
+      if (!isRight && showGooglyEyes && Array.isArray(a.pupils)) {
+        a.pupils.forEach((p, idx) => {
+          const dir = idx === 0 ? 1 : -1;
+          p.position.y = Math.sin(t * 9 * derpFactor + idx) * 0.045;
+          p.position.z = Math.cos(t * 9 * derpFactor * dir) * 0.045;
+        });
+      }
+
+      // Dust particles
+      if (Array.isArray(a.dustParticles)) {
+        a.dustParticles.forEach((dp) => {
+          const prog = (t * 1.9 * (isRight ? 1.1 : chaos * 0.8) + dp.offset) % 1;
+          dp.mesh.position.x = -0.5 - prog * 2.3;
+          dp.mesh.position.y = -1.9 + Math.sin(prog * Math.PI) * 0.35;
+          const sc = (1 - prog) * 1.25;
+          dp.mesh.scale.set(sc, sc, sc);
+        });
+      }
+
+      if (a.type === 'giraffe') {
+        const cycle = t * 6.2 * (isRight ? 1.05 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.sin(cycle * 2) * (isRight ? 0.14 : 0.24 * derpFactor) + 0.15;
+        a.bodyGroup.rotation.z = Math.cos(cycle) * (isRight ? 0.1 : 0.22 * derpFactor);
+        a.bodyGroup.rotation.x = isRight ? 0 : Math.sin(cycle * 1.5) * 0.14 * derpFactor;
+        a.neckPivot.rotation.z = Math.sin(cycle - 0.6) * (isRight ? 0.09 : 0.32 * derpFactor);
+        a.tailPivot.rotation.z = Math.sin(cycle * 1.5) * 0.35;
+
+        a.legs.forEach((leg, i) => {
+          const swing = Math.sin(cycle + leg.phase);
+          leg.hip.rotation.z = swing * (isRight ? 0.62 : 0.85 * derpFactor);
+          leg.hip.rotation.x = isRight ? 0 : Math.cos(cycle + i) * 0.25 * derpFactor;
+          leg.knee.rotation.z = Math.max(0, -Math.cos(cycle + leg.phase)) * (leg.isFront ? -0.78 : 0.68);
+        });
+      } else if (a.type === 'trex') {
+        const cycle = t * 7.5 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.abs(Math.sin(cycle)) * 0.25;
+        a.bodyGroup.rotation.z = (isRight ? 0.08 : 0.25) * Math.sin(cycle);
+        a.jawPivot.rotation.z = -0.18 - Math.abs(Math.sin(t * 8)) * 0.28;
+        a.tailGroup.rotation.y = Math.sin(cycle) * 0.28;
+        a.arms.forEach((arm) => {
+          arm.armPivot.rotation.z = Math.sin(t * 18 * derpFactor + arm.phase) * (isRight ? 0.35 : 0.95);
+        });
+        a.legs.forEach((leg) => {
+          leg.hip.rotation.z = Math.sin(cycle + leg.phase) * 0.65;
+          leg.ankle.rotation.z = Math.cos(cycle + leg.phase) * 0.45;
+        });
+      } else if (a.type === 'cat') {
+        const cycle = t * 9.5 * (isRight ? 1.0 : chaos * 0.9);
+        a.bodyGroup.position.y = Math.sin(cycle * 2) * 0.22 + 0.05;
+        a.bodyGroup.rotation.z = Math.cos(cycle) * (isRight ? 0.14 : 0.32);
+        if (!isRight) a.bodyGroup.position.z = Math.sin(t * 14) * 0.22;
+        a.tailPivot.rotation.z = Math.sin(t * 10) * 0.45;
+        a.legs.forEach((leg) => {
+          leg.legPivot.rotation.z = Math.sin(cycle + leg.phase) * 0.78;
+        });
+      } else if (a.type === 'duck') {
+        const cycle = t * 9.0 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.abs(Math.sin(cycle)) * 0.18;
+        a.bodyGroup.rotation.x = Math.sin(cycle) * (isRight ? 0.16 : 0.38);
+        a.headGroup.rotation.y = isRight ? Math.sin(cycle) * 0.15 : t * 6.5 * derpFactor;
+        a.wings.forEach((w) => {
+          w.wingPivot.rotation.x = w.side * Math.abs(Math.sin(cycle * 1.5)) * (isRight ? 0.45 : 0.95);
+        });
+        a.feet.forEach((f) => {
+          f.legPivot.rotation.z = Math.sin(cycle + f.phase) * 0.68;
+        });
+      } else if (a.type === 'crab') {
+        const cycle = t * 8.5 * (isRight ? 1.0 : chaos * 0.85);
+        a.bodyGroup.position.y = Math.abs(Math.sin(cycle)) * 0.24 - 0.35;
+        a.bodyGroup.position.z = Math.sin(cycle * 0.5) * 0.45;
+        a.bodyGroup.rotation.z = isRight ? Math.sin(cycle) * 0.12 : Math.sin(cycle) * 0.45;
+        a.claws.forEach((c) => {
+          c.clawPivot.position.y = 0.15 + Math.abs(Math.sin(cycle + c.phase)) * 0.28;
+          c.clawPivot.rotation.z = Math.sin(cycle + c.phase) * 0.45;
+        });
+        a.legs.forEach((l) => {
+          l.legPivot.rotation.z = Math.sin(cycle + l.phase) * 0.45;
+        });
+      } else if (a.type === 'penguin') {
+        const cycle = t * 6.5 * (isRight ? 1.0 : chaos * 0.85);
+        if (isRight) {
+          a.bodyGroup.position.y = -0.85 + Math.sin(cycle * 2) * 0.06;
+          a.bodyGroup.rotation.z = Math.sin(cycle) * 0.05;
+        } else {
+          // Derpy bowling-pin tumble on left!
+          a.bodyGroup.position.y = -0.35 + Math.abs(Math.sin(cycle)) * 0.45;
+          a.bodyGroup.rotation.z = t * 3.8 * derpFactor;
+        }
+        a.flippers.forEach((f) => {
+          f.flipPivot.rotation.x = f.side * Math.sin(cycle * 2) * 0.45;
+        });
+      } else if (a.type === 'dragon') {
+        a.segments.forEach((seg, idx) => {
+          seg.position.y = Math.sin(t * 5.5 * (isRight ? 1 : 1.3) - idx * 0.45) * (isRight ? 0.35 : 0.52);
+          if (!isRight) seg.rotation.x = t * 3 + idx;
+        });
+        a.leftWing.rotation.x = Math.sin(t * 7.5) * 0.65;
+        a.rightWing.rotation.x = -Math.sin(t * 7.5) * 0.65;
+      } else if (a.type === 'octo') {
+        a.head.position.y = 0.35 + Math.sin(t * 5) * 0.16;
+        a.arms.forEach((arm) => {
+          arm.joints.forEach((j, idx) => {
+            j.rotation.z = -0.5 + Math.sin(t * 5.5 * (isRight ? 1 : derpFactor) + arm.phase - idx * 0.5) * (isRight ? 0.35 : 0.72);
+          });
+        });
+      }
+    }
+
+    const clock = new THREE.Clock();
+    const timerBadge = document.getElementById('timerBadge');
+    function animate() {
+      requestAnimationFrame(animate);
+      resizeStages();
+      const t = clock.getElapsedTime();
+      const secs = Math.floor(t % 15);
+      timerBadge.textContent = `0:${secs < 10 ? '0' + secs : secs}`;
+
+      const cx = camLookX + Math.sin(camYaw) * Math.cos(camPitch) * camDist;
+      const cy = camLookY + Math.sin(camPitch) * camDist;
+      const cz = Math.cos(camYaw) * Math.cos(camPitch) * camDist;
+
+      [leftStage, rightStage].forEach((st) => {
+        st.camera.position.set(cx, cy, cz);
+        st.camera.lookAt(camLookX, camLookY, 0);
+        updateStageAnimation(st, t);
+        st.renderer.render(st.scene, st.camera);
+      });
+    }
+    animate();
+
+    // 1-Click Composite Video Recorder (.webm)
+    const recordBtn = document.getElementById('recordBtn');
+    recordBtn.addEventListener('click', () => {
+      const compCanvas = document.createElement('canvas');
+      compCanvas.width = 1280;
+      compCanvas.height = 800;
+      const ctx = compCanvas.getContext('2d');
+
+      const stream = compCanvas.captureStream(60);
+      const recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+      const chunks = [];
+      recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+      recorder.onstop = () => {
+        const blob = new Blob(chunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${leftLabelInput.value.replace(/\s+/g, '_')}_vs_${rightLabelInput.value.replace(/\s+/g, '_')}_${sceneSelect.value}.webm`;
+        a.click();
+        recordBtn.textContent = '⏺ Record 8s Video';
+        recordBtn.disabled = false;
+      };
+
+      recordBtn.disabled = true;
+      recordBtn.textContent = '🔴 Recording 8s...';
+      recorder.start();
+
+      const startTime = performance.now();
+      function drawComposite() {
+        if (performance.now() - startTime > 8000) {
+          recorder.stop();
+          return;
+        }
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 1280, 800);
+
+        ctx.drawImage(leftStage.renderer.domElement, 0, 64, 640, 736);
+        ctx.drawImage(rightStage.renderer.domElement, 640, 64, 640, 736);
+
+        ctx.strokeStyle = '#e5e7eb';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 64);
+        ctx.lineTo(1280, 64);
+        ctx.moveTo(640, 0);
+        ctx.lineTo(640, 800);
+        ctx.stroke();
+
+        ctx.fillStyle = '#1f2937';
+        ctx.font = '500 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(leftLabelInput.value, 320, 42);
+        ctx.fillText(rightLabelInput.value, 960, 42);
+
+        if (showRoasts) {
+          ctx.font = '700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.fillStyle = '#b91c1c';
+          ctx.fillText(leftRoastBadge.textContent, 320, 98);
+          ctx.fillStyle = '#047857';
+          ctx.fillText(rightRoastBadge.textContent, 960, 98);
+        }
+
+        ctx.fillStyle = '#9ca3af';
+        ctx.font = '500 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(watermarkInput.value, 1254, 776);
+
+        requestAnimationFrame(drawComposite);
+      }
+      drawComposite();
+    });
+  </script>
+</body>
+</html>
