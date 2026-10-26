@@ -29,6 +29,9 @@ An interactive split-screen **Three.js (WebGL) Viral Benchmark Studio** built wi
   18. 🦄 **Unicorn Rainbow Gallop** (*Cardboard Horse with Traffic Cone vs. Celestial Rainbow Pegasus*)
   19. 🐊 **Crocodile Death-Roll** (*Glitching Green Log Barrel-Roll vs. Jurassic Swamp Ambush*)
   20. 🦥 **Sloth on 10 Espressos** (*Caffeinated Potato at 9000 RPM vs. Supersonic Zen Jungle Acrobat*)
+- **🔑 Bring Your Own Gemini API Key (BYOK — 100% Client-Side)**:
+  - Anyone using the live studio can paste their own **Gemini API Key** (`AIza...`) into the toolbar to call **`gemini-4-argon`**, **`gemini-3.8-flash`**, **`gemini-3.5-flash-lite`**, or **`gemma-4-31b-it`** directly from their browser via the official `@google/genai` Interactions API (`client.interactions.create`).
+  - Your API key is stored **only in your own browser's `localStorage`** and is never shared with any external backend. Also includes a **Demo Mode** that works out-of-the-box without an API key.
 - **Clean Dropdown Selectors for Models, Matchups & Hooks**:
   - **Quick Matchup Preset Dropdown**: `Introducing Qwen 4 😀 (Opus 5.5 vs Qwen 4)`, `Claude 4.6 Opus vs Qwen 4`, `GPT-5.5 Turbo vs Qwen 4 Max`, `Opus 5.5 vs Gemini 4 Argon`, `Qwen 4 vs Gemini 4 Argon`, `Opus 5.5 vs Gemini 4 Carbon`, etc.
   - **Left & Right Model Dropdowns**: `Qwen 4 😀`, `Qwen 4 Max`, `Qwen 4 Coder`, `Qwen 4 235B`, `Gemini 4 Argon ⚡`, `Gemini 4 Carbon`, `Opus 5.5`, `Claude 4.6 Opus`, `GPT-5.5 Turbo`, `DeepSeek R2`, `Gemma 4 31B-IT`, `Llama 4 405B`, `Grok 4 Unhinged`.
