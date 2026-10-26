@@ -2825,16 +2825,186 @@
       setTimeout(() => { btn.textContent = '📸 Copy Image (Ctrl+V)'; }, 2500);
     });
 
+    // Pure-JS Zero-Dependency GIF89a Animated GIF Encoder (Works 100% offline & online without CDN issues)
+    function encodeAnimatedGif89a(framesRgba, width, height, delayCs = 8) {
+      const out = [];
+      const writeByte = (b) => out.push(b & 0xff);
+      const writeShort = (v) => { out.push(v & 0xff, (v >> 8) & 0xff); };
+      const writeAscii = (s) => { for (let i = 0; i < s.length; i++) out.push(s.charCodeAt(i)); };
+
+      // Build 256-color palette: 216 (6x6x6 cube) + 24 dark/UI/brand tones + 16 grayscale
+      const palette = [];
+      const steps = [0, 51, 102, 153, 204, 255];
+      for (let r of steps) for (let g of steps) for (let b of steps) palette.push([r, g, b]);
+      const uiColors = [
+        [9, 13, 22], [13, 19, 34], [19, 28, 49], [30, 41, 59], [51, 65, 85], [71, 85, 105],
+        [148, 163, 184], [248, 250, 252], [239, 68, 68], [16, 185, 129], [56, 189, 248], [168, 85, 247],
+        [245, 158, 11], [236, 72, 153], [34, 197, 94], [59, 130, 246], [99, 102, 241], [234, 179, 8],
+        [20, 26, 42], [24, 34, 56], [40, 20, 30], [16, 40, 34], [28, 25, 23], [68, 64, 60]
+      ];
+      for (const c of uiColors) palette.push(c);
+      for (let i = 0; palette.length < 256; i++) {
+        const v = Math.round((i / 15) * 255);
+        palette.push([v, v, v]);
+      }
+
+      // Fast 15-bit RGB (32x32x32) lookup table -> palette index
+      const lut = new Uint8Array(32768);
+      for (let r5 = 0; r5 < 32; r5++) {
+        const r = (r5 << 3) | (r5 >> 2);
+        for (let g5 = 0; g5 < 32; g5++) {
+          const g = (g5 << 3) | (g5 >> 2);
+          for (let b5 = 0; b5 < 32; b5++) {
+            const b = (b5 << 3) | (b5 >> 2);
+            let bestIdx = 0;
+            let bestDist = 1e9;
+            for (let p = 0; p < 256; p++) {
+              const pr = palette[p][0] - r;
+              const pg = palette[p][1] - g;
+              const pb = palette[p][2] - b;
+              const d = pr * pr + pg * pg + pb * pb;
+              if (d < bestDist) {
+                bestDist = d;
+                bestIdx = p;
+                if (d === 0) break;
+              }
+            }
+            lut[(r5 << 10) | (g5 << 5) | b5] = bestIdx;
+          }
+        }
+      }
+
+      // 1. GIF89a Header & Logical Screen Descriptor
+      writeAscii('GIF89a');
+      writeShort(width);
+      writeShort(height);
+      writeByte(0xf7); // Global color table flag (1), 8-bit color res (7), 256 entries (7)
+      writeByte(0);    // Background color index
+      writeByte(0);    // Pixel aspect ratio
+
+      // 2. Global Color Table (768 bytes)
+      for (let i = 0; i < 256; i++) {
+        writeByte(palette[i][0]);
+        writeByte(palette[i][1]);
+        writeByte(palette[i][2]);
+      }
+
+      // 3. Netscape 2.0 Infinite Loop Application Extension
+      writeByte(0x21); writeByte(0xff); writeByte(0x0b);
+      writeAscii('NETSCAPE2.0');
+      writeByte(0x03); writeByte(0x01); writeShort(0); writeByte(0x00);
+
+      // Reusable LZW state table (4096 codes * 256 next-bytes)
+      const dict = new Int32Array(4096 * 256);
+      const nPixels = width * height;
+      const indexedPixels = new Uint8Array(nPixels);
+
+      // 4. Encode Each Frame
+      for (let f = 0; f < framesRgba.length; f++) {
+        const rgba = framesRgba[f];
+        for (let i = 0, p = 0; i < nPixels; i++, p += 4) {
+          indexedPixels[i] = lut[((rgba[p] >> 3) << 10) | ((rgba[p + 1] >> 3) << 5) | (rgba[p + 2] >> 3)];
+        }
+
+        // Graphic Control Extension
+        writeByte(0x21); writeByte(0xf9); writeByte(0x04);
+        writeByte(0x04); // Disposal method 1 (do not dispose), no transparency
+        writeShort(delayCs);
+        writeByte(0x00); writeByte(0x00);
+
+        // Image Descriptor
+        writeByte(0x2c);
+        writeShort(0); writeShort(0);
+        writeShort(width); writeShort(height);
+        writeByte(0x00);
+
+        // LZW Compression (minCodeSize = 8)
+        const minCodeSize = 8;
+        writeByte(minCodeSize);
+
+        const clearCode = 256;
+        const eoiCode = 257;
+        let nextCode = 258;
+        let codeSize = 9;
+        let maxCode = 512;
+
+        dict.fill(-1);
+
+        let bitBuf = 0;
+        let bitCount = 0;
+        const subBlock = new Uint8Array(256);
+        let subLen = 0;
+
+        const flushSubBlock = () => {
+          if (subLen > 0) {
+            writeByte(subLen);
+            for (let i = 0; i < subLen; i++) writeByte(subBlock[i]);
+            subLen = 0;
+          }
+        };
+
+        const emitCode = (code) => {
+          bitBuf |= (code << bitCount);
+          bitCount += codeSize;
+          while (bitCount >= 8) {
+            subBlock[subLen++] = bitBuf & 0xff;
+            if (subLen === 255) flushSubBlock();
+            bitBuf >>= 8;
+            bitCount -= 8;
+          }
+        };
+
+        emitCode(clearCode);
+
+        let prefix = indexedPixels[0];
+        for (let i = 1; i < nPixels; i++) {
+          const k = indexedPixels[i];
+          const key = (prefix << 8) | k;
+          const child = dict[key];
+          if (child !== -1) {
+            prefix = child;
+          } else {
+            emitCode(prefix);
+            if (nextCode < 4096) {
+              dict[key] = nextCode++;
+              if (nextCode > maxCode && codeSize < 12) {
+                codeSize++;
+                maxCode <<= 1;
+              }
+            } else {
+              emitCode(clearCode);
+              dict.fill(-1);
+              nextCode = 258;
+              codeSize = 9;
+              maxCode = 512;
+            }
+            prefix = k;
+          }
+        }
+
+        emitCode(prefix);
+        emitCode(eoiCode);
+
+        if (bitCount > 0) {
+          subBlock[subLen++] = bitBuf & 0xff;
+        }
+        flushSubBlock();
+        writeByte(0x00); // Block Terminator
+      }
+
+      // 5. GIF Trailer
+      writeByte(0x3b);
+      return new Uint8Array(out);
+    }
+
     // 1-Click Looping Animated .GIF Recorder & Downloader (100% compatible with LinkedIn & X Photo Upload!)
     const downloadGifBtn = document.getElementById('downloadGifBtn');
     downloadGifBtn.addEventListener('click', async () => {
       downloadGifBtn.disabled = true;
       downloadGifBtn.textContent = '⏳ Recording GIF (0%)...';
       try {
-        const { GIFEncoder, quantize, applyPalette } = await import('https://esm.sh/gifenc@1.0.3');
-        const gif = GIFEncoder();
-        const gifW = 800;
-        const gifH = 512;
+        const gifW = 720;
+        const gifH = 460;
 
         const fullCanvas = document.createElement('canvas');
         fullCanvas.width = 1280;
@@ -2846,20 +3016,21 @@
         scaledCanvas.height = gifH;
         const scaledCtx = scaledCanvas.getContext('2d', { willReadFrequently: true });
 
-        const totalFrames = 32;
+        const totalFrames = 28;
+        const capturedFrames = [];
         for (let f = 0; f < totalFrames; f++) {
-          downloadGifBtn.textContent = `⏳ Encoding GIF (${Math.round(((f + 1) / totalFrames) * 100)}%)...`;
+          downloadGifBtn.textContent = `⏳ Capturing 3D Frames (${Math.round(((f + 1) / totalFrames) * 100)}%)...`;
           drawCompositeFrame(fullCtx);
           scaledCtx.drawImage(fullCanvas, 0, 0, gifW, gifH);
           const imgData = scaledCtx.getImageData(0, 0, gifW, gifH).data;
-          const palette = quantize(imgData, 256, { format: 'rgb444' });
-          const index = applyPalette(imgData, palette, 'rgb444');
-          gif.writeFrame(index, gifW, gifH, { palette, delay: 80 });
-          await new Promise((r) => setTimeout(r, 75));
+          capturedFrames.push(new Uint8ClampedArray(imgData));
+          await new Promise((r) => setTimeout(r, 80));
         }
 
-        gif.finish();
-        const bytes = gif.bytesView();
+        downloadGifBtn.textContent = '⚙️ Building Animated .GIF...';
+        await new Promise((r) => setTimeout(r, 20));
+
+        const bytes = encodeAnimatedGif89a(capturedFrames, gifW, gifH, 8);
         const blob = new Blob([bytes], { type: 'image/gif' });
         const url = URL.createObjectURL(blob);
 
