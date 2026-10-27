@@ -1,5 +1,51 @@
 # 🦒🔥 3D LLM Comedy Benchmark Arena (20 Animals)
 
+![3D_Engine](https://img.shields.io/badge/3D_Engine-Three.js_WebGL-000000?style=for-the-badge&logo=threedotjs&logoColor=white)
+![Benchmark](https://img.shields.io/badge/Benchmark-Side_by_Side_Arena-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![Characters](https://img.shields.io/badge/Characters-20_Procedural_Animals-0F9D58?style=for-the-badge&logo=javascript&logoColor=white)
+![Author](https://img.shields.io/badge/Author-Robina_Mirbahar-EA4335?style=for-the-badge&logo=github&logoColor=white)
+
+> **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) (Google Developer Expert in Cloud & AI)  
+> **Focus:** Interactive Side-by-Side Three.js WebGL Benchmark Studio for Frontier Models (20 Animated 3D Characters)
+
+---
+
+## 🎯 Why I Built 3D LLM Comedy Benchmark Arena (Engineering Purpose & Real-World Value)
+
+### 1. 🎭 Visualizing Spatial & Procedural Code Generation
+Static text leaderboards fail to capture how well frontier LLMs understand 3D geometry, kinematics, and procedural animation. I built this side-by-side 3D arena to test spatial reasoning visually at 60 FPS.
+
+### 2. 🦒 20 Procedural 3D Animals & Comedy Physics
+I implemented 20 articulated 3D characters (Giraffe, T-Rex, Cat, Crab, Dragon, Penguin, and more) with expressive procedural animations so anyone can compare model creativity and physical realism side by side.
+
+### 3. 🎬 Zero-Dependency Browser Studio for Live Demos
+I engineered the entire arena to run directly in the browser with custom camera presets, lighting controls, and recording-ready layouts for technical talks and benchmarks.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    subgraph UI ["1. Interactive Arena Controls"]
+        U_Sel["20 Character Selector (Giraffe, T-Rex, Dragon, Crab...)"]
+        U_Cam["Camera Presets & Comedy Action Triggers"]
+    end
+    subgraph Render ["2. Dual Three.js WebGL Viewports"]
+        R_Left["Left Viewport: Model A Procedural Rig & Physics"]
+        R_Right["Right Viewport: Model B Procedural Rig & Physics"]
+    end
+    subgraph Perf ["3. Real-Time Telemetry & Recording"]
+        P_FPS["60 FPS Animation Loop & Shader Pipeline"]
+        P_Out["Side-by-Side Visual Comparison"]
+    end
+    U_Sel --> R_Left & R_Right
+    U_Cam --> R_Left & R_Right
+    R_Left & R_Right --> P_FPS --> P_Out
+```
+
+---
+
 An interactive split-screen **Three.js (WebGL) Viral Benchmark Studio** built with **Gemini 4 Argon API** for creating side-by-side 3D AI model comedy comparisons for **X (Twitter)** and **LinkedIn** (e.g., `Introducing Qwen 4 😀 — Opus 5.5 vs Qwen 4`, `Qwen 4 vs Gemini 4 Argon`, `Opus 5.5 vs Gemini 4 Carbon`, `Claude 4.6 Opus vs Qwen 4 Max`).
 
 🔗 **Live Studio (GitHub Pages):** [https://robinamirbahar.github.io/llm-3d-comedy-arena/](https://robinamirbahar.github.io/llm-3d-comedy-arena/)
@@ -38,3 +84,22 @@ An interactive split-screen **Three.js (WebGL) Viral Benchmark Studio** built wi
   - **✨ Gemini 4 Argon API Live Roast Button**: Generates fresh AI benchmark roasts and ready-to-post X / LinkedIn captions.
 - **⏺ 1-Click 60 FPS `.webm` Video Export**:
   - Records an 8-second side-by-side 1280×800 video with headers, roast badges, divider line, and `@RobinaMirbahar • Gemini 4 Argon API` watermark.
+
+<!-- AUTHOR_SIGNATURE_START -->
+---
+
+## 👩‍💻 About the Author
+
+**Robina Mirbahar — Google Cloud & AI Architect**  
+*Google Developer Expert (GDE) in Cloud & AI • Published Author • Multi-Agent Systems & Serverless GPU Builder*
+
+[![GitHub](https://img.shields.io/badge/GitHub-RobinaMirbahar-181717?style=for-the-badge&logo=github)](https://github.com/RobinaMirbahar)
+[![Medium](https://img.shields.io/badge/Medium-@robinamirbahar-000000?style=for-the-badge&logo=medium)](https://medium.com/@robinamirbahar)
+[![DEV.to](https://img.shields.io/badge/DEV.to-robinamirbahar-0A0A0A?style=for-the-badge&logo=devdotto)](https://dev.to/robinamirbahar)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Robina_Mirbahar-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/robina-mirbahar)
+[![GDE Profile](https://img.shields.io/badge/Google_Developer_Expert-Profile-4285F4?style=for-the-badge&logo=google)](https://g.dev/RobinaMirbahar)
+[![YouTube](https://img.shields.io/badge/YouTube-@RobinaMirbahar-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@RobinaMirbahar)
+[![X](https://img.shields.io/badge/X-@RobinaMirbahar-000000?style=for-the-badge&logo=x)](https://x.com/RobinaMirbahar)
+[![Amazon Author](https://img.shields.io/badge/Amazon_Book-Cloud_Computing_Voyage-FF9900?style=for-the-badge&logo=amazon)](https://www.amazon.com/dp/B0D146249R)
+
+<!-- AUTHOR_SIGNATURE_END -->
