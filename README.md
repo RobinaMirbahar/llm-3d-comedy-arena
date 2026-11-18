@@ -5,7 +5,7 @@
 ![Characters](https://img.shields.io/badge/Characters-20_Procedural_Animals-0F9D58?style=for-the-badge&logo=javascript&logoColor=white)
 ![Author](https://img.shields.io/badge/Author-Robina_Mirbahar-EA4335?style=for-the-badge&logo=github&logoColor=white)
 
-> **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) (Google Developer Expert in Cloud & AI)  
+> **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) ([Google Developer Expert in Cloud & AI](https://developers.google.com/profile/u/106918534005910641104?utm_campaign=deveco_gdemembers&utm_source=deveco) · Google Cloud Champion Innovator · Co-Author of [*AI Engineering*](https://www.amazon.com/dp/B0GWCZWCF4))  
 > **Focus:** Interactive Side-by-Side Three.js WebGL Benchmark Studio for Frontier Models (20 Animated 3D Characters)
 
 ---
@@ -42,6 +42,16 @@ flowchart TD
     U_Sel --> R_Left & R_Right
     U_Cam --> R_Left & R_Right
     R_Left & R_Right --> P_FPS --> P_Out
+    style UI fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+    style U_Sel fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style Selector fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style U_Cam fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    style Render fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+    style R_Left fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style R_Right fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style Perf fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    style P_FPS fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+    style P_Out fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
 ```
 
 ---
@@ -84,26 +94,6 @@ An interactive split-screen **Three.js (WebGL) Viral Benchmark Studio** built wi
   - **✨ Gemini 4 Argon API Live Roast Button**: Generates fresh AI benchmark roasts and ready-to-post X / LinkedIn captions.
 - **⏺ 1-Click 60 FPS `.webm` Video Export**:
   - Records an 8-second side-by-side 1280×800 video with headers, roast badges, divider line, and `@RobinaMirbahar • Gemini 4 Argon API` watermark.
-
-<!-- AUTHOR_SIGNATURE_START -->
----
-
-## 👩‍💻 About the Author
-
-**Robina Mirbahar — Google Cloud & AI Architect**  
-*Google Developer Expert (GDE) in Cloud & AI • Published Author • Multi-Agent Systems & Serverless GPU Builder*
-
-[![GitHub](https://img.shields.io/badge/GitHub-RobinaMirbahar-181717?style=for-the-badge&logo=github)](https://github.com/RobinaMirbahar)
-[![Medium](https://img.shields.io/badge/Medium-@robinamirbahar-000000?style=for-the-badge&logo=medium)](https://medium.com/@robinamirbahar)
-[![DEV.to](https://img.shields.io/badge/DEV.to-robinamirbahar-0A0A0A?style=for-the-badge&logo=devdotto)](https://dev.to/robinamirbahar)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Robina_Mirbahar-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/robinamirbahar)
-[![GDE Profile](https://img.shields.io/badge/Google_Developer_Expert-Profile-4285F4?style=for-the-badge&logo=google)](https://g.dev/RobinaMirbahar?utm_campaign=deveco_gdemembers&utm_source=deveco)
-[![YouTube](https://img.shields.io/badge/YouTube-@RobinaCodesAI-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@RobinaCodesAI)
-[![X](https://img.shields.io/badge/X-@RobinaMirbahar-000000?style=for-the-badge&logo=x)](https://x.com/RobinaMirbahar)
-[![Amazon Author](https://img.shields.io/badge/Amazon_Book-Cloud_Computing_Voyage-FF9900?style=for-the-badge&logo=amazon)](https://www.amazon.com/dp/B0D146249R)
-
-<!-- AUTHOR_SIGNATURE_END -->
-
 ---
 
 ### Official Google Developer Resources
