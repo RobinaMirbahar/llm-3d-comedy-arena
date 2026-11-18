@@ -42,16 +42,6 @@ flowchart TD
     U_Sel --> R_Left & R_Right
     U_Cam --> R_Left & R_Right
     R_Left & R_Right --> P_FPS --> P_Out
-    style UI fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
-    style U_Sel fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
-    style Selector fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
-    style U_Cam fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    style Render fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
-    style R_Left fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
-    style R_Right fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
-    style Perf fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    style P_FPS fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
-    style P_Out fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
 ```
 
 ---
