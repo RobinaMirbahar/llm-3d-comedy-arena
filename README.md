@@ -6,7 +6,8 @@
 ![Author](https://img.shields.io/badge/Author-Robina_Mirbahar-EA4335?style=for-the-badge&logo=github&logoColor=white)
 
 > **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) ([Google Developer Expert in Cloud & AI](https://developers.google.com/profile/u/106918534005910641104?utm_campaign=deveco_gdemembers&utm_source=deveco) · Google Cloud Champion Innovator · Co-Author of [*AI Engineering*](https://www.amazon.com/dp/B0GWCZWCF4))  
-> **Focus:** Interactive Side-by-Side Three.js WebGL Benchmark Studio for Frontier Models (20 Animated 3D Characters)
+> 📚 **Live Interactive Benchmark:** [3D WebGL Comedy Arena Studio (llm-3d-comedy-arena)](https://github.com/RobinaMirbahar/llm-3d-comedy-arena)  
+> **Core Stack:** Three.js 3D WebGL Engine (20 Procedural Animated Characters), [Google Gemini API](https://ai.google.dev/gemini-api/docs?utm_campaign=deveco_gdemembers&utm_source=deveco), Open-Weights [Google Gemma](https://ai.google.dev/gemma?utm_campaign=deveco_gdemembers&utm_source=deveco), and Side-by-Side Arena Evaluation.
 
 ---
 
